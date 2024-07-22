@@ -1,0 +1,54 @@
+@mixin mac_keyboard_btn($add_width) {
+    width: calc(4.5rem + $add_width);
+    height: 4.5rem;
+    border-radius: .5rem;
+    background-color: darkgray;
+}
+
+.cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 76.5rem;
+    height: 25.5rem;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnDefault {
+    @include mac_keyboard_btn(0rem);
+}
+
+.btnDelete {
+    @include mac_keyboard_btn(2rem);
+}
+
+.btnTab {
+    @include mac_keyboard_btn(2rem);
+}
+
+.btnCapsLock {
+    @include mac_keyboard_btn(3.5rem);
+}
+
+.btnEnter {
+    @include mac_keyboard_btn(3.5rem);
+}
+
+.btnShift {
+    @include mac_keyboard_btn(6rem);
+}
+
+.btnCmd {
+    @include mac_keyboard_btn(1rem);
+}
+
+.btnSpace {
+    @include mac_keyboard_btn(22rem);
+}

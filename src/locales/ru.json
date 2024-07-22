@@ -1,0 +1,64 @@
+{
+    "components": {
+        "main": {
+            "Settings": {
+                "title": "Настройки",
+                "placeholder": {
+                    "movieType": "Тип",
+                    "genreType": "Жанр",
+                    "yearFrom": "Год начала",
+                    "yearTo": "Год окончания",
+                    "country": "Страна"
+                },
+                "label": {
+                    "save": "Сохранить",
+                    "reset": "Сбросить"
+                }
+            },
+            "Info": {
+                "title": "Информация",
+                "label": {
+                    "originalTitle": "Название",
+                    "year": "Год",
+                    "country": "Страна",
+                    "director": "Режиссер",
+                    "genre": "Жанр",
+                    "runtime": "Длительность",
+                    "summary": "Краткое содержание"
+                }
+            }
+        },
+        "shared": {
+            "ErrorBoundary": {
+                "title": "Произошла какая-то ошибка..."
+            }
+        }
+    },
+    "common": {
+        "label": {
+            "MovieType": {
+                "0": "Все",
+                "1": "Фильмы",
+                "2": "Сериалы"
+            },
+            "network": {
+                "online": "Соединение было восстановлено",
+                "offline": "Соединение было потеряно"
+            }
+        },
+        "errors": {
+            "movieType": {
+                "invalid": "Тип указан некорректно"
+            },
+            "yearFrom": {
+                "invalid": "Год начала указан неверно"
+            },
+            "yearTo": {
+                "invalid": "Год окончания указан неверно"
+            },
+            "settings": {
+                "parsing": "Не удалось считать ранее сохраненные настройки"
+            }
+        }
+    }
+}

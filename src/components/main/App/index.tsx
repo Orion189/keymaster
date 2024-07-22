@@ -1,40 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import SpeedIcon from '@mui/icons-material/Speed';
-import ErrorIcon from '@mui/icons-material/Error';
-import PercentIcon from '@mui/icons-material/Percent';
+import React, { KeyboardEvent, useCallback } from 'react';
+// import { Link } from 'react-router-dom';
+import TopBlock from '@components/main/TopBlock';
+import CenterBlock from '@components/main/CenterBlock';
+import BottomBlock from '@components/main/BottomBlock';
 import styles from './style.module.scss';
 
-const App: React.FC = () => (
-    <div className={styles.cont}>
-        <div className={styles.topBlock}>
-            <div className={styles.paramBlock}>
-                <SpeedIcon className={styles.paramIcon} />
-                <div className={styles.paramDataCont}>
-                    <div className={styles.paramDataValue}>0</div>
-                    <div className={styles.paramDataTitle}>char/min</div>
-                </div>
-            </div>
-            <div className={styles.paramBlock}>
-                <PercentIcon className={styles.paramIcon} />
-                <div className={styles.paramDataCont}>
-                    <div className={styles.paramDataValue}>100</div>
-                    <div className={styles.paramDataTitle}>accuracy</div>
-                </div>
-            </div>
-            <div className={styles.paramBlock}>
-                <ErrorIcon className={styles.paramIcon} />
-                <div className={styles.paramDataCont}>
-                    <div className={styles.paramDataValue}>0</div>
-                    <div className={styles.paramDataTitle}>typos</div>
-                </div>
-            </div>
+const App: React.FC = () => {
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
+        console.log(event.code, event.key);
+    }, []);
+
+    return (
+        <div className={styles.cont} onKeyDown={onKeyDown} autoFocus tabIndex={0}>
+            <TopBlock />
+            <CenterBlock />
+            <BottomBlock />
         </div>
-        <div className={styles.centerBlock}>
-            dhfg sdfhghj sdjfh djsfg dhhh kaadfs dfhb sbd sdhf hsdf shdgfh sjdhfjg sgdf sdjf hgsdfhj hjsdf lkjsdklfj lkssdlj lsdkfk sdfkj lksdfj
-        </div>
-        <div className={styles.bottomBlock}>{'App Component'}</div>
-    </div>
-);
+    );
+};
+
 // <Link to={'/second'}>{'Go Second'}</Link>
 export default App;

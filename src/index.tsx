@@ -4,18 +4,20 @@ import { createHashRouter, createRoutesFromElements, RouterProvider, Route } fro
 import { ThemeProvider } from '@mui/material/styles';
 import { StyledEngineProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { darkTheme } from './theme/dark';
+import { darkTheme } from '@/theme/dark';
 //import { lightTheme } from './theme/light';
-import App from './components/main/App';
-import Second from './components/main/Second';
-import Root from './components/shared/layouts/Root';
-import Test from './components/main/Test';
-import ErrorPage from './components/pages/error';
+import App from '@components/main/App';
+import Second from '@components/main/Second';
+import Root from '@components/shared/layouts/Root';
+import Test from '@components/main/Test';
+import ErrorPage from '@components/pages/error';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+
+import '@/locales';
 
 const router = createHashRouter(
     createRoutesFromElements(
