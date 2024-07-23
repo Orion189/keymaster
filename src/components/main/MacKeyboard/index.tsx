@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { Key } from '@/enums';
 import { useTranslation } from 'react-i18next';
 import styles from './style.module.scss';
@@ -87,34 +87,19 @@ const rowItems5 = [
 
 const Row: FC<RowProps> = ({ items }) => {
     const { t } = useTranslation();
-    const getClassName = useCallback((item: Key) => {
-        switch (item) {
-            case Key.Backspace:
-                return styles.btnDelete;
-            case Key.Tab:
-                return styles.btnTab;
-            case Key.CapsLock:
-                return styles.btnCapsLock;
-            case Key.Enter:
-                return styles.btnEnter;
-            case Key.ShiftLeft:
-            case Key.ShiftRight:
-                return styles.btnShift;
-            case Key.MetaLeft:
-            case Key.MetaRight:
-                return styles.btnCmd;
-            case Key.Space:
-                return styles.btnSpace;
-            default:
-                return styles.btnDefault;
-        }
-    }, []);
 
     return (
         <div className={styles.row}>
             {items.map((item: Key) => (
-                <div key={item} className={getClassName(item)}>
-                    {t(`components.main.MacKeyboard.keys.${item}`)}
+                <div key={item} className={`${styles.Default} ${styles[item]}`}>
+                    {item === Key.ArrowUp ? (
+                        <>
+                            <div className={styles.btnArrowUp}>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
+                            <div className={styles.btnArrowDown}>{t('components.main.MacKeyboard.keys.ArrowDown')}</div>
+                        </>
+                    ) : (
+                        <div>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
+                    )}
                 </div>
             ))}
         </div>
@@ -124,7 +109,7 @@ const Row: FC<RowProps> = ({ items }) => {
 const MacKeyboard: React.FC = () => {
     return (
         <div className={styles.cont}>
-            {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map(rowItems => (
+            {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map((rowItems) => (
                 <Row key={rowItems.toString()} items={rowItems} />
             ))}
         </div>

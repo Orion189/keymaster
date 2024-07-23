@@ -7,7 +7,10 @@ import styles from './style.module.scss';
 
 const App: React.FC = () => {
     const onKeyDown = useCallback((event: KeyboardEvent) => {
+        const isCapsLockEnabled = event?.getModifierState('CapsLock');
+
         console.log(event.code, event.key);
+        console.log('isCapsLockEnabled:', isCapsLockEnabled);
     }, []);
 
     return (

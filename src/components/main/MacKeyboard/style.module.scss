@@ -1,10 +1,3 @@
-@mixin mac_keyboard_btn($add_width) {
-    width: calc(4.5rem + $add_width);
-    height: 4.5rem;
-    border-radius: .5rem;
-    background-color: darkgray;
-}
-
 .cont {
     display: flex;
     flex-direction: column;
@@ -21,34 +14,204 @@
     align-items: center;
 }
 
-.btnDefault {
+@mixin mac_keyboard_btn($add_width) {
+    width: calc(4.5rem + $add_width);
+}
+
+.Default {
     @include mac_keyboard_btn(0rem);
+
+    height: 4.5rem;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: gray;
 }
 
-.btnDelete {
+.Backspace {
     @include mac_keyboard_btn(2rem);
+
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnTab {
+.Tab {
     @include mac_keyboard_btn(2rem);
+
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnCapsLock {
+.CapsLock {
     @include mac_keyboard_btn(3.5rem);
+
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+
+    &::before {
+        content: "•";
+        position: absolute;
+        color: greenyellow;
+        font-size: 2rem;
+        line-height: 1rem;
+        transform: translate(0rem, -2.75rem);
+    }
 }
 
-.btnEnter {
+.Enter {
     @include mac_keyboard_btn(3.5rem);
+
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnShift {
+.ShiftLeft {
     @include mac_keyboard_btn(6rem);
+
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnCmd {
-    @include mac_keyboard_btn(1rem);
+.ShiftRight {
+    @include mac_keyboard_btn(6rem);
+
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnSpace {
+.Fn {
+    @include mac_keyboard_btn(0rem);
+
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+.MetaLeft,
+.MetaRight {
+    @include mac_keyboard_btn(1.1rem);
+}
+
+.MetaLeft,
+.MetaRight,
+.ControlLeft,
+.AltLeft,
+.AltRight {
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 1rem;
+    color: white;
+}
+
+.Space {
     @include mac_keyboard_btn(22rem);
+}
+
+.ArrowUp {
+    @include mac_keyboard_btn(0rem);
+
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.ArrowUp,
+.ArrowDown,
+.ArrowLeft,
+.ArrowRight {
+    color: white;
+}
+
+.ArrowLeft,
+.ArrowRight {
+    font-size: .9rem;
+}
+
+.btnArrowUp {
+    @include mac_keyboard_btn(0rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 2.1rem;
+    font-size: 1rem;
+}
+
+.btnArrowDown {
+    @include mac_keyboard_btn(0rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 2.1rem;
+    font-size: 1rem;
+}
+
+.KeyF {
+    &::after {
+        content: "_";
+        position: absolute;
+        color: white;
+        transform: translateY(2rem);
+    }
+}
+
+.KeyJ {
+    &::after {
+        content: "_";
+        position: absolute;
+        color: white;
+        transform: translateY(2rem);
+    }
+}
+
+.animatedBg {
+    animation: 1.5s linear 0s infinite bg;
+}
+
+@keyframes bg {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: blue;
+    }
+    100% {
+        background-color: transparent;
+    }
 }
