@@ -64,10 +64,16 @@
     &::before {
         content: "•";
         position: absolute;
-        color: greenyellow;
+        color: white;
         font-size: 2rem;
         line-height: 1rem;
         transform: translate(0rem, -2.75rem);
+    }
+}
+
+.capsLockEnabled {
+    &::before {
+        color: greenyellow;
     }
 }
 

@@ -68,4 +68,15 @@ export const enum Key {
     ArrowUp = 'ArrowUp',
     ArrowDown = 'ArrowDown',
     ArrowRight = 'ArrowRight'
-};
+}
+
+export const enum LOCALE {
+    EN = 'en',
+    UK = 'uk',
+    RU = 'ru'
+}
+
+export const enum THEME {
+    LIGHT = 'light',
+    DARK = 'dark'
+}

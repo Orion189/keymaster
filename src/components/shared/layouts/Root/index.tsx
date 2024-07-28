@@ -1,28 +1,22 @@
-import { useState, useCallback, FC } from 'react';
+import { useCallback, FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SideMenu from '@components/shared/SideMenu';
+import store from '@/store';
 import styles from './style.module.scss';
 
 const Root: FC = () => {
-    const [open, setOpen] = useState(false);
-
-    const toggleDrawer = useCallback(
-        (newOpen: boolean) => () => {
-            setOpen(newOpen);
-        },
-        [setOpen]
-    );
+    const openDrawer = useCallback(() => {
+        store.set('app', { ...store.app, isDrawerOpened: true });
+    }, []);
 
     return (
         <div className={styles.cont}>
-            <IconButton aria-label="settings" onClick={toggleDrawer(true)} className={styles.settingsBtn}>
+            <IconButton aria-label="settings" onClick={openDrawer} className={styles.settingsBtn}>
                 <SettingsIcon fontSize="large" />
             </IconButton>
-            <Drawer open={open} onClose={toggleDrawer(false)}>
-                'Drawer'
-            </Drawer>
+            <SideMenu />
             <Outlet />
         </div>
     );

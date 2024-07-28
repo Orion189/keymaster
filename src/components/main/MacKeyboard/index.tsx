@@ -1,10 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { Key } from '@/enums';
 import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
+import store from '@/store';
 import styles from './style.module.scss';
 
 type RowProps = {
     items: Key[];
+};
+
+type KeyProps = {
+    item: Key;
 };
 
 const rowItems1 = [
@@ -85,35 +91,47 @@ const rowItems5 = [
     Key.ArrowRight
 ];
 
-const Row: FC<RowProps> = ({ items }) => {
+const KeyItem: FC<KeyProps> = observer(({ item }) => {
     const { t } = useTranslation();
+    const isCapsLockEnabled = store.app.isCapsLockEnabled;
+    const getAdditionalCSS = useCallback(
+        (item: Key) => {
+            switch (item) {
+                case Key.CapsLock:
+                    return isCapsLockEnabled ? styles.capsLockEnabled : '';
+            }
+        },
+        [isCapsLockEnabled]
+    );
 
     return (
-        <div className={styles.row}>
-            {items.map((item: Key) => (
-                <div key={item} className={`${styles.Default} ${styles[item]}`}>
-                    {item === Key.ArrowUp ? (
-                        <>
-                            <div className={styles.btnArrowUp}>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
-                            <div className={styles.btnArrowDown}>{t('components.main.MacKeyboard.keys.ArrowDown')}</div>
-                        </>
-                    ) : (
-                        <div>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
-                    )}
-                </div>
-            ))}
+        <div key={item} className={`${styles.Default} ${styles[item]} ${getAdditionalCSS(item)}`}>
+            {item === Key.ArrowUp ? (
+                <>
+                    <div className={styles.btnArrowUp}>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
+                    <div className={styles.btnArrowDown}>{t('components.main.MacKeyboard.keys.ArrowDown')}</div>
+                </>
+            ) : (
+                <div>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
+            )}
         </div>
     );
-};
+});
 
-const MacKeyboard: React.FC = () => {
-    return (
-        <div className={styles.cont}>
-            {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map((rowItems) => (
-                <Row key={rowItems.toString()} items={rowItems} />
-            ))}
-        </div>
-    );
-};
+const Row: FC<RowProps> = memo(({ items }) => (
+    <div className={styles.row}>
+        {items.map((item: Key) => (
+            <KeyItem key={item} item={item} />
+        ))}
+    </div>
+));
+
+const MacKeyboard: React.FC = memo(() => (
+    <div className={styles.cont}>
+        {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map((rowItems) => (
+            <Row key={rowItems.toString()} items={rowItems} />
+        ))}
+    </div>
+));
 
 export default MacKeyboard;
