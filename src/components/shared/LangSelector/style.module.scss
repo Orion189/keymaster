@@ -1,0 +1,26 @@
+.cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+}
+
+.flag {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+}
+
+.en {
+    background-image: url('./flags/en.svg');
+}
+
+.ru {
+    background-image: url('./flags/ru.svg');
+}
+
+.uk {
+    background-image: url('./flags/uk.svg');
+}

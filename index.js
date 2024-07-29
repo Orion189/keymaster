@@ -7,7 +7,7 @@ const createWindow = () => {
     });
 
     win.loadFile('./dist/index.html');
-    win.webContents.openDevTools()
+    win.webContents.openDevTools(); // TODO: remove before release
 };
 
 app.whenReady().then(() => {

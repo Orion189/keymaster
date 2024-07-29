@@ -76,28 +76,28 @@
             "TopBlock": {
                 "titles": {
                     "typingSpeed": {
-                        "characters": "chars/min",
-                        "words": "words/min"
+                        "characters": "симв/хв",
+                        "words": "слів/хв"
                     },
-                    "accuracy": "accuracy",
-                    "typos": "typos"
+                    "accuracy": "точність",
+                    "typos": "помилок"
                 } 
             }
         },
         "shared": {
             "LangSelector": {
-                "title": "Language",
+                "title": "Мова",
                 "locale": {
-                    "en": "EN",
-                    "uk": "UA",
-                    "ru": "RU"
+                    "en": "Англ",
+                    "uk": "Укр",
+                    "ru": "Рос"
                 }
             },
             "TypingSpeedSelector": {
-                "title": "Typing speed",
+                "title": "Швидкість набору",
                 "options": {
-                    "characters": "characters",
-                    "words": "words"
+                    "characters": "символи",
+                    "words": "слова"
                 }
             }
         }

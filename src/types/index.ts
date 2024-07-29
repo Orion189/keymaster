@@ -1,8 +1,9 @@
-import { LOCALE, THEME } from '@/enums';
+import { LOCALE, THEME, TYPING_SPEED } from '@/enums';
 
 export type SettingsType = {
     lang: LOCALE;
     theme: THEME;
+    typingSpeed: TYPING_SPEED
 };
 
 export type AppType = {

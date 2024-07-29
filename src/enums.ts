@@ -80,3 +80,8 @@ export const enum THEME {
     LIGHT = 'light',
     DARK = 'dark'
 }
+
+export const enum TYPING_SPEED {
+    CHARACTERS = 'characters',
+    WORDS = 'words'
+}

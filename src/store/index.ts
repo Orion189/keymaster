@@ -1,5 +1,5 @@
 import { SettingsType, AppType, StoreValuesType } from '@/types';
-import { LOCALE, THEME } from '@/enums';
+import { LOCALE, THEME, TYPING_SPEED } from '@/enums';
 import { makeObservable, observable, action } from 'mobx';
 import { makePersistable, stopPersisting } from 'mobx-persist-store';
 
@@ -11,7 +11,8 @@ export const defaultState: {
 } = {
     settings: {
         lang: LOCALE.EN,
-        theme: THEME.LIGHT
+        theme: THEME.LIGHT,
+        typingSpeed: TYPING_SPEED.CHARACTERS
     },
     app: {
         isCapsLockEnabled: false,

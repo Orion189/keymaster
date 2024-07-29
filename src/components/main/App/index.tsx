@@ -1,51 +1,42 @@
-import React, { KeyboardEvent, useCallback, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-import TopBlock from '@components/main/TopBlock';
-import CenterBlock from '@components/main/CenterBlock';
-import BottomBlock from '@components/main/BottomBlock';
-import store from '@/store';
-import styles from './style.module.scss';
+import React, { FC } from 'react';
+import { createHashRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { StyledEngineProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { darkTheme } from '@/theme/dark';
+//import { lightTheme } from './theme/light';
+import Home from '@components/main/Home';
+import Second from '@components/main/Second';
+import Root from '@components/shared/layouts/Root';
+import Test from '@components/main/Test';
+import ErrorPage from '@components/pages/error';
+import useAppLang from '@components/hooks/useAppLang';
 
-const App: React.FC = () => {
-    const onKeyDownHandler = useCallback((event: KeyboardEvent) => {
-        const isCapsLockEnabled = event?.getModifierState('CapsLock');
+const router = createHashRouter(
+    createRoutesFromElements(
+        <>
+            <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+                <Route index element={<Home />} />
+                <Route path="second" element={<Second />} />
+            </Route>
+            <Route path="/test" element={<Test />} errorElement={<ErrorPage />} />
+        </>
+    )
+);
 
-        console.log(event.code, event.key);
-        console.log('isCapsLockEnabled:', isCapsLockEnabled);
-
-        store.set('app', { ...store.app, isCapsLockEnabled });
-    }, []);
-    const onKeyUpHandler = useCallback((event: KeyboardEvent) => {
-        const isCapsLockEnabled = event?.getModifierState('CapsLock');
-
-        store.set('app', { ...store.app, isCapsLockEnabled });
-    }, []);
-
-    useEffect(() => {
-        // @ts-expect-error: broken typings
-        document.addEventListener('keydown', onKeyDownHandler);
-        // @ts-expect-error: broken typings
-        document.addEventListener('keyup', onKeyUpHandler);
-    }, []);
-
-    useEffect(
-        () => () => {
-            // @ts-expect-error: broken typings
-            document.removeEventListener('keydown', onKeyDownHandler);
-            // @ts-expect-error: broken typings
-            document.removeEventListener('keyup', onKeyUpHandler);
-        },
-        []
-    );
+const App: FC = () => {
+    useAppLang();
 
     return (
-        <div className={styles.cont}>
-            <TopBlock />
-            <CenterBlock />
-            <BottomBlock />
-        </div>
+        <React.StrictMode>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={darkTheme}>
+                    <CssBaseline />
+                    <RouterProvider router={router} />
+                </ThemeProvider>
+            </StyledEngineProvider>
+        </React.StrictMode>
     );
 };
 
-// <Link to={'/second'}>{'Go Second'}</Link>
 export default App;
