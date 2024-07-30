@@ -1,5 +1,5 @@
 import store from '@/store';
-import { autorun } from 'mobx';
+import { reaction } from 'mobx';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +7,10 @@ const useAppTheme = () => {
     const { i18n } = useTranslation();
 
     useEffect(() => {
-        autorun(() => i18n.changeLanguage(store.settings.lang));
+        reaction(
+            () => store.settings.lang,
+            lang => i18n.changeLanguage(lang)
+        );
     }, []);
 
     return null;

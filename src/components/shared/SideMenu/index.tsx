@@ -4,57 +4,51 @@ import store from '@/store';
 import Drawer from '@mui/material/Drawer';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
 import Container from '@mui/material/Container';
 import LangSelector from '@/components/shared/LangSelector';
 import TypingSpeedSelector from '@/components/shared/TypingSpeedSelector';
+import ShowKeyHint from '@/components/shared/ShowKeyHint';
+import ShowHandsHint from '@/components/shared/ShowHandsHint';
+import ErrorSoundHint from '@/components/shared/ErrorSoundHint';
+import Exercises from '@/components/shared/Exercises';
+import IncludeUpperCase from '@/components/shared/IncludeUpperCase';
+import IncludeNumbers from '@/components/shared/IncludeNumbers';
+import IncludePunctuation from '@/components/shared/IncludePunctuation';
 import styles from './style.module.scss';
 
 const SideMenu: FC = observer(() => {
+    const { t } = useTranslation();
     const closeDrawer = useCallback(() => {
         store.set('app', { ...store.app, isDrawerOpened: false });
     }, []);
     const [value, setValue] = useState(0);
-
     const handleChange = (event: SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
     return (
         <Drawer open={store.app.isDrawerOpened} onClose={closeDrawer} PaperProps={{ className: styles.cont }}>
-            <Typography variant="h6" align="center">
-                Settings
-            </Typography>
             <Container>
-                <LangSelector />
-                <TypingSpeedSelector />
-                <Box className={styles.setting}>
-                    <Typography variant="subtitle1" align="left">
-                        Show key hints
-                    </Typography>
-                    <Box className={styles.settingValue}></Box>
+                <Tabs value={value} onChange={handleChange} variant="fullWidth">
+                    <Tab label={t('components.shared.SideMenu.sections.exercises.title')} />
+                    <Tab label={t('components.shared.SideMenu.sections.settings.title')} />
+                </Tabs>
+                <Box hidden={value !== 0}>
+                    <Exercises />
                 </Box>
-                <Box className={styles.setting}>
-                    <Typography variant="subtitle1" align="left">
-                        Show hands hints
-                    </Typography>
-                    <Box className={styles.settingValue}></Box>
-                </Box>
-                <Box className={styles.setting}>
-                    <Typography variant="subtitle1" align="left">
-                        Error sound
-                    </Typography>
-                    <Box className={styles.settingValue}></Box>
+                <Box hidden={value !== 1}>
+                    <LangSelector />
+                    <TypingSpeedSelector />
+                    <ShowKeyHint />
+                    <ShowHandsHint />
+                    <ErrorSoundHint />
+                    <IncludeUpperCase />
+                    <IncludeNumbers />
+                    <IncludePunctuation />
                 </Box>
             </Container>
-            <Typography variant="h6" align="center">
-                Exercises
-            </Typography>
-            <Tabs value={value} onChange={handleChange}>
-                <Tab label="Auto" />
-                <Tab label="Manual" />
-            </Tabs>
         </Drawer>
     );
 });

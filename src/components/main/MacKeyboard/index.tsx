@@ -108,11 +108,11 @@ const KeyItem: FC<KeyProps> = observer(({ item }) => {
         <div key={item} className={`${styles.Default} ${styles[item]} ${getAdditionalCSS(item)}`}>
             {item === Key.ArrowUp ? (
                 <>
-                    <div className={styles.btnArrowUp}>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
-                    <div className={styles.btnArrowDown}>{t('components.main.MacKeyboard.keys.ArrowDown')}</div>
+                    <div className={styles.btnArrowUp}>{t(`common.keyboard.keys.${item}`)}</div>
+                    <div className={styles.btnArrowDown}>{t('common.keyboard.keys.ArrowDown')}</div>
                 </>
             ) : (
-                <div>{t(`components.main.MacKeyboard.keys.${item}`)}</div>
+                <div>{t(`common.keyboard.keys.${item}`)}</div>
             )}
         </div>
     );

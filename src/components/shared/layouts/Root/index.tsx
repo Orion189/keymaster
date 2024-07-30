@@ -13,7 +13,7 @@ const Root: FC = () => {
 
     return (
         <div className={styles.cont}>
-            <IconButton aria-label="settings" onClick={openDrawer} className={styles.settingsBtn}>
+            <IconButton onClick={openDrawer} className={styles.settingsBtn}>
                 <SettingsIcon fontSize="large" />
             </IconButton>
             <SideMenu />

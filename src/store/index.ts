@@ -12,11 +12,18 @@ export const defaultState: {
     settings: {
         lang: LOCALE.EN,
         theme: THEME.LIGHT,
-        typingSpeed: TYPING_SPEED.CHARACTERS
+        typingSpeed: TYPING_SPEED.CHARACTERS,
+        isShowKeyHintEnabled: true,
+        isShowHandsHintEnabled: true,
+        isErrorSoundHintEnabled: true,
+        isUpperCaseEnabled: true,
+        isNumbersEnabled: true,
+        isPunctuationEnabled: true
     },
     app: {
         isCapsLockEnabled: false,
-        isDrawerOpened: false
+        isDrawerOpened: false,
+        curLesson: 0
     }
 };
 
