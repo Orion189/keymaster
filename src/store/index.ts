@@ -16,14 +16,15 @@ export const defaultState: {
         isShowKeyHintEnabled: true,
         isShowHandsHintEnabled: true,
         isErrorSoundHintEnabled: true,
-        isUpperCaseEnabled: true,
-        isNumbersEnabled: true,
-        isPunctuationEnabled: true
+        isUpperCaseEnabled: false,
+        isNumbersEnabled: false,
+        isPunctuationEnabled: false
     },
     app: {
         isCapsLockEnabled: false,
         isDrawerOpened: false,
-        curLesson: 0
+        curExNum: null,
+        exercises: {}
     }
 };
 

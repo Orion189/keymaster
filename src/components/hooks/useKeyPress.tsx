@@ -16,7 +16,7 @@ const useKeyPress = () => {
             store.set('app', { ...store.app, isCapsLockEnabled });
         }
 
-        console.log(event.code, event.key);
+        console.log(event.code, event.key, event);
     }, [isDrawerOpened]);
     const onKeyUpHandler = useCallback((event: KeyboardEvent) => {
         const isCapsLockEnabled = event?.getModifierState('CapsLock');

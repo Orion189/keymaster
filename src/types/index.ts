@@ -1,4 +1,4 @@
-import { LOCALE, THEME, TYPING_SPEED } from '@/enums';
+import { LOCALE, THEME, TYPING_SPEED, Key } from '@/enums';
 
 export type SettingsType = {
     lang: LOCALE;
@@ -15,7 +15,17 @@ export type SettingsType = {
 export type AppType = {
     isCapsLockEnabled: boolean;
     isDrawerOpened: boolean;
-    curLesson: number;
+    curExNum: number | null;
+    exercises: ExerciseGeneralType
+};
+
+export type ExerciseGeneralType = {
+    [key in LOCALE]?: ExerciseType[]
+};
+
+export type ExerciseType = {
+    chars: string[];
+    position: number;
 };
 
 export type StoreValuesType = SettingsType | Partial<AppType>;

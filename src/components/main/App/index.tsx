@@ -11,6 +11,7 @@ import Root from '@components/shared/layouts/Root';
 import Test from '@components/main/Test';
 import ErrorPage from '@components/pages/error';
 import useAppLang from '@components/hooks/useAppLang';
+import useExercise from '@components/hooks/useExercise';
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createHashRouter(
 
 const App: FC = () => {
     useAppLang();
+    useExercise();
 
     return (
         <React.StrictMode>

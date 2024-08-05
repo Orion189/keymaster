@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import store from '@/store';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { lessonsConfig } from './lessons.config';
+import { lessonsConfig } from '@/configs/lessons.config';
 import { Key } from '@/enums';
 import styles from './style.module.scss';
 
@@ -21,15 +21,14 @@ type ExerciseProps = {
 const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
     const { t } = useTranslation();
     const getLessonTitle = useCallback(
-        (lesson: Key[]) =>
-            lesson
-                .map((key) => t(`common.keyboard.keys.${key}`))
-                .join(' ')
-                .toLocaleLowerCase(),
-        [t]
+        (lesson: string[]) =>
+            lesson.join(' ').toLowerCase(),
+        []
     );
     const onClickExerciseHandler = useCallback(() => {
-        store.set('app', { ...store.app, curLesson: index });
+        if (index !== store.app.curExNum) {
+            store.set('app', { ...store.app, curExNum: index });
+        }
     }, [index]);
 
     return (
@@ -41,7 +40,7 @@ const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
                 </Typography>
             }
         >
-            <ListItemButton selected={store.app.curLesson === index} onClick={onClickExerciseHandler}>
+            <ListItemButton selected={store.app.curExNum === index} onClick={onClickExerciseHandler}>
                 {isLast ? (
                     <ListItemText
                         primary={t('components.shared.Exercises.lastLesson.title')}
