@@ -85,3 +85,16 @@ export const enum TYPING_SPEED {
     CHARACTERS = 'characters',
     WORDS = 'words'
 }
+
+export const enum FINGER {
+    LEFT_THUMB,
+    LEFT_INDEX,
+    LEFT_MIDDLE,
+    LEFT_RING,
+    LEFT_LITTLE,
+    RIGHT_THUMB,
+    RIGHT_INDEX,
+    RIGHT_MIDDLE,
+    RIGHT_RING,
+    RIGHT_LITTLE
+}

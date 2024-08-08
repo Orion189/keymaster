@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { lessonsConfig } from '@/configs/lessons.config';
+import { letters } from '@/configs/lessons.config';
 import { reaction } from 'mobx';
 import { LOCALE } from '@/enums';
 import type { ExerciseGeneralType } from '@/types';
@@ -66,7 +66,7 @@ const useExercise = () => {
             isUpperCaseEnabled !== prevParams.isUpperCaseEnabled ||
             isPunctuationEnabled !== prevParams.isPunctuationEnabled;
 
-        if (!lessonsConfig[lang] || curExNum === null || !lang) {
+        if (!letters[lang] || curExNum === null || !lang) {
             return;
         }
 
@@ -76,7 +76,7 @@ const useExercise = () => {
 
         if (!exercises[lang][curExNum] || isTogglesChanged) {
             const exercise = getExercise(
-                lessonsConfig[lang][curExNum],
+                letters[lang][curExNum],
                 isNumbersEnabled,
                 isUpperCaseEnabled,
                 isPunctuationEnabled

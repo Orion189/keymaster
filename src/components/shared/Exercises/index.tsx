@@ -8,12 +8,12 @@ import ListItemText from '@mui/material/ListItemText';
 import store from '@/store';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { lessonsConfig } from '@/configs/lessons.config';
+import { letters } from '@/configs/lessons.config';
 import { Key } from '@/enums';
 import styles from './style.module.scss';
 
 type ExerciseProps = {
-    lesson: Key[];
+    lesson: string[];
     index: number;
     isLast: boolean;
 };
@@ -21,9 +21,11 @@ type ExerciseProps = {
 const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
     const { t } = useTranslation();
     const getLessonTitle = useCallback(
-        (lesson: string[]) =>
-            lesson.join(' ').toLowerCase(),
-        []
+        (lesson: Key[]) =>
+            lesson
+                .join(' ')
+                .toLocaleLowerCase(),
+        [t]
     );
     const onClickExerciseHandler = useCallback(() => {
         if (index !== store.app.curExNum) {
@@ -58,7 +60,7 @@ const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
 });
 
 const Exercises: FC = observer(() => {
-    const lessons = lessonsConfig[store.settings.lang];
+    const lessons = letters[store.settings.lang];
 
     return (
         <Box className={styles.cont}>
