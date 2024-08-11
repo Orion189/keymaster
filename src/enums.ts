@@ -87,14 +87,14 @@ export const enum TYPING_SPEED {
 }
 
 export const enum FINGER {
-    LEFT_THUMB,
-    LEFT_INDEX,
-    LEFT_MIDDLE,
-    LEFT_RING,
-    LEFT_LITTLE,
-    RIGHT_THUMB,
-    RIGHT_INDEX,
-    RIGHT_MIDDLE,
-    RIGHT_RING,
-    RIGHT_LITTLE
+    LEFT_LITTLE = 'leftLittle',
+    LEFT_RING = 'leftRing',
+    LEFT_MIDDLE = 'leftMiddle',
+    LEFT_INDEX = 'leftIndex',
+    LEFT_THUMB = 'leftThumb',
+    RIGHT_THUMB = 'rightThumb',
+    RIGHT_INDEX = 'rightIndex',
+    RIGHT_MIDDLE = 'rightMiddle',
+    RIGHT_RING = 'rightRing',
+    RIGHT_LITTLE = 'rightLittle'
 }

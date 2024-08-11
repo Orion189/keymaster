@@ -3,6 +3,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+}
+
+.keysCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 76.5rem;
     height: 25.5rem;
 }

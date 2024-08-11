@@ -1,9 +1,10 @@
 import { useEffect, useCallback } from 'react';
-import { letters } from '@/configs/lessons.config';
+import { letters, numbers, capitalLetters, symbols } from '@/configs/lessons.config';
 import { reaction } from 'mobx';
 import { LOCALE } from '@/enums';
 import type { ExerciseGeneralType } from '@/types';
 import store from '@/store';
+import { arrShuffle } from '@/utils/common.util';
 
 type ExerciseParams = {
     lang: LOCALE;
@@ -14,43 +15,38 @@ type ExerciseParams = {
     isPunctuationEnabled: boolean;
 };
 
-const STRING_LENGTH = 75;
+const STRING_LENGTH = 80;
 
 const useExercise = () => {
     const getExercise = useCallback(
-        (config: string[], isNumbersEnabled: boolean, isUpperCaseEnabled: boolean, isPunctuationEnabled: boolean) => {
+        (lang: LOCALE, curExNum: number, isNumbersEnabled: boolean, isUpperCaseEnabled: boolean, isPunctuationEnabled: boolean) => {
             let chars = [];
-            let updatedConfig = [...config];
+            const lettersConfig = letters[lang]?.[curExNum];
+            const capitalLettersConfig = capitalLetters[lang]?.[curExNum];
+            const symbolsConfig = symbols[lang];
+            const numbersConfig = numbers;
+
+            if (!lettersConfig || !capitalLettersConfig || !symbolsConfig || !numbersConfig) {
+                return;
+            }
+
+            chars = lettersConfig.join('').repeat(25).split('');
+
+            if (isUpperCaseEnabled) {
+                chars.push(...capitalLettersConfig.join('').repeat(6).split(''));
+            }
 
             if (isNumbersEnabled) {
-                updatedConfig.push('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+                chars.push(...numbersConfig.join('').repeat(6).split(''));
             }
 
             if (isPunctuationEnabled) {
-                updatedConfig.push(',', ';', ':', '?', '!', '-');
+                chars.push(...symbolsConfig);
             }
 
-            updatedConfig = updatedConfig.reduce((acc: string[], elem, ind) => {
-                acc.push(elem);
+            chars.push(...Array.from(' '.repeat(10)));
 
-                if (ind % 2 === 0) {
-                    acc.push(' ');
-                }
-
-                return acc;
-            }, []);
-
-            for (let i = 0; i < STRING_LENGTH; i += 1) {
-                chars.push(updatedConfig[Math.floor(Math.random() * updatedConfig.length)]);
-            }
-
-            if (isUpperCaseEnabled) {
-                chars = chars.map((char, index) =>
-                    config.includes(char) && (index % 2) + 1 === Math.floor(Math.random() * 2) + 1
-                        ? char.toUpperCase()
-                        : char
-                );
-            }
+            chars = arrShuffle(chars).slice(0, STRING_LENGTH).join('').trim().split('');
 
             return {
                 chars,
@@ -76,19 +72,22 @@ const useExercise = () => {
 
         if (!exercises[lang][curExNum] || isTogglesChanged) {
             const exercise = getExercise(
-                letters[lang][curExNum],
+                lang,
+                curExNum,
                 isNumbersEnabled,
                 isUpperCaseEnabled,
                 isPunctuationEnabled
             );
 
-            exercises[lang][curExNum] = exercise;
-
-            store.set('app', { ...store.app, exercises });
+            if (exercise) {
+                exercises[lang][curExNum] = exercise;
+    
+                store.set('app', { ...store.app, exercises });
+            }
         }
     }, []);
 
-    useEffect(() => {//store.reset();
+    useEffect(() => {
         reaction(
             () => ({
                 lang: store.settings.lang,

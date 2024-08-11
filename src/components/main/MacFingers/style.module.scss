@@ -1,0 +1,128 @@
+.cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 76.5rem;
+    height: 25.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.finger {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.leftLittle {
+    top: 190px;
+    left: 80px;
+    width: 111px;
+    height: 243px;
+    background-image: url(./fingers/LEFT_LITTLE_DEFAULT.svg);
+}
+.leftLittle.active {
+    background-image: url(./fingers/LEFT_LITTLE_ACTIVE.svg);
+}
+
+.leftRing {
+    top: 180px;
+    left: 155px;
+    width: 142px;
+    height: 260px;
+    background-image: url(./fingers/LEFT_RING_DEFAULT.svg);
+}
+.leftRing.active {
+    background-image: url(./fingers/LEFT_RING_ACTIVE.svg);
+}
+
+.leftMiddle {
+    top: 170px;
+    left: 250px;
+    width: 138px;
+    height: 268px;
+    background-image: url(./fingers/LEFT_MIDDLE_DEFAULT.svg);
+}
+.leftMiddle.active {
+    background-image: url(./fingers/LEFT_MIDDLE_ACTIVE.svg);
+}
+
+.leftIndex {
+    top: 190px;
+    left: 345px;
+    width: 121px;
+    height: 250px;
+    background-image: url(./fingers/LEFT_INDEX_DEFAULT.svg);
+}
+.leftIndex.active {
+    background-image: url(./fingers/LEFT_INDEX_ACTIVE.svg);
+}
+
+.leftThumb {
+    top: 345px;
+    left: 450px;
+    width: 87px;
+    height: 102px;
+    background-image: url(./fingers/LEFT_THUMB_DEFAULT.svg);
+}
+.leftThumb.active {
+    background-image: url(./fingers/LEFT_THUMB_ACTIVE.svg);
+}
+
+.rightThumb {
+    top: 345px;
+    right: 535px;
+    width: 87px;
+    height: 102px;
+    background-image: url(./fingers/RIGHT_THUMB_DEFAULT.svg);
+}
+.rightThumb.active {
+    background-image: url(./fingers/RIGHT_THUMB_ACTIVE.svg);
+}
+
+.rightIndex {
+    top: 190px;
+    right: 430px;
+    width: 121px;
+    height: 250px;
+    background-image: url(./fingers/RIGHT_INDEX_DEFAULT.svg);
+}
+.rightIndex.active {
+    background-image: url(./fingers/RIGHT_INDEX_ACTIVE.svg);
+}
+
+.rightMiddle {
+    top: 170px;
+    right: 335px;
+    width: 138px;
+    height: 268px;
+    background-image: url(./fingers/RIGHT_MIDDLE_DEFAULT.svg);
+}
+.rightMiddle.active {
+    background-image: url(./fingers/RIGHT_MIDDLE_ACTIVE.svg);
+}
+
+.rightRing {
+    top: 180px;
+    right: 240px;
+    width: 142px;
+    height: 260px;
+    background-image: url(./fingers/RIGHT_RING_DEFAULT.svg);
+}
+.rightRing.active {
+    background-image: url(./fingers/RIGHT_RING_ACTIVE.svg);
+}
+
+.rightLittle {
+    top: 190px;
+    right: 165px;
+    width: 111px;
+    height: 243px;
+    background-image: url(./fingers/RIGHT_LITTLE_DEFAULT.svg);
+}
+.rightLittle.active {
+    background-image: url(./fingers/RIGHT_LITTLE_ACTIVE.svg);
+}

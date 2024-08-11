@@ -1,8 +1,9 @@
-import React, { FC, memo, useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 import { Key } from '@/enums';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import store from '@/store';
+import MacFingers from '@/components/main/MacFingers';
 import styles from './style.module.scss';
 
 type RowProps = {
@@ -126,11 +127,14 @@ const Row: FC<RowProps> = memo(({ items }) => (
     </div>
 ));
 
-const MacKeyboard: React.FC = memo(() => (
+const MacKeyboard: FC = memo(() => (
     <div className={styles.cont}>
-        {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map((rowItems) => (
-            <Row key={rowItems.toString()} items={rowItems} />
-        ))}
+        <div className={styles.keysCont}>
+            {[rowItems1, rowItems2, rowItems3, rowItems4, rowItems5].map((rowItems) => (
+                <Row key={rowItems.toString()} items={rowItems} />
+            ))}
+        </div>
+        <MacFingers />
     </div>
 ));
 
