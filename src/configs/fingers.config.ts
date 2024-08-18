@@ -5,7 +5,7 @@ type FingersType = {
 };
 
 export const fingersConfig: FingersType = {
-    [FINGER.LEFT_LITTLE]: [Key.IntlBackslash, Key.Digit1, Key.KeyQ, Key.KeyA, Key.KeyZ, Key.Backquote],
+    [FINGER.LEFT_LITTLE]: [Key.IntlBackslash, Key.Digit1, Key.KeyQ, Key.KeyA, Key.KeyZ, Key.Backquote, Key.ShiftLeft],
     [FINGER.LEFT_RING]: [Key.Digit2, Key.KeyW, Key.KeyS, Key.KeyX],
     [FINGER.LEFT_MIDDLE]: [Key.Digit3, Key.KeyE, Key.KeyD, Key.KeyC],
     [FINGER.LEFT_INDEX]: [Key.Digit4, Key.Digit5, Key.KeyR, Key.KeyT, Key.KeyF, Key.KeyG, Key.KeyV, Key.KeyB],
@@ -24,6 +24,7 @@ export const fingersConfig: FingersType = {
         Key.Semicolon,
         Key.Quote,
         Key.Backslash,
-        Key.Slash
+        Key.Slash,
+        Key.ShiftRight
     ]
 };

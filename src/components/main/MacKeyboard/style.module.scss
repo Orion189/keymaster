@@ -218,12 +218,17 @@
     animation: 1.5s linear 0s infinite bg;
 }
 
+.bold {
+    font-weight: bold;
+    color: #ffffff;
+}
+
 @keyframes bg {
     0% {
         background-color: transparent;
     }
     50% {
-        background-color: blue;
+        background-color: #5F75A4;
     }
     100% {
         background-color: transparent;

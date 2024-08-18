@@ -1,12 +1,32 @@
 import { Key, LOCALE } from '@/enums';
 
-type HighLightsByLocaleType = {
+export type HighLightsByLocaleType = {
     [key in Key]?: string[];
 };
 
-type HighLightsType = {
-    [key in LOCALE]?: HighLightsByLocaleType;
+export type HighLightsType = {
+    [key in LOCALE]: HighLightsByLocaleType;
 };
+
+export const makeBoldExceptionKeys = [
+    Key.Backspace,
+    Key.Tab,
+    Key.CapsLock,
+    Key.Enter,
+    Key.ShiftLeft,
+    Key.ShiftRight,
+    Key.Fn,
+    Key.ControlLeft,
+    Key.AltLeft,
+    Key.MetaLeft,
+    Key.Space,
+    Key.MetaRight,
+    Key.AltRight,
+    Key.ArrowLeft,
+    Key.ArrowUp,
+    Key.ArrowDown,
+    Key.ArrowRight
+];
 
 export const highlightsConfig: HighLightsType = {
     [LOCALE.EN]: {
@@ -50,7 +70,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Quote]: ["'", '"'],
         [Key.Backslash]: ['\\', '|'],
 
-        [Key.ShiftLeft]: [
+        [Key.ShiftRight]: [
             '±',
             '!',
             '@',
@@ -85,7 +105,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Comma]: [',', '<'],
         [Key.Period]: ['.', '>'],
         [Key.Slash]: ['/', '?'],
-        [Key.ShiftRight]: [
+        [Key.ShiftLeft]: [
             '^',
             '&',
             '*',
@@ -155,7 +175,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Quote]: ['э', 'Э'],
         [Key.Backslash]: ['\\', '/'],
 
-        [Key.ShiftLeft]: [
+        [Key.ShiftRight]: [
             'Ё',
             '!',
             '"',
@@ -190,7 +210,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Comma]: ['б', 'Б'],
         [Key.Period]: ['ю', 'Ю'],
         [Key.Slash]: ['.', ','],
-        [Key.ShiftRight]: [
+        [Key.ShiftLeft]: [
             ':',
             '?',
             '*',
@@ -260,7 +280,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Quote]: ['є', 'Є'],
         [Key.Backslash]: ['ʼ', '₴'],
 
-        [Key.ShiftLeft]: [
+        [Key.ShiftRight]: [
             '/',
             '!',
             '"',
@@ -295,7 +315,7 @@ export const highlightsConfig: HighLightsType = {
         [Key.Comma]: ['б', 'Б'],
         [Key.Period]: ['ю', 'Ю'],
         [Key.Slash]: ['.', ','],
-        [Key.ShiftRight]: [
+        [Key.ShiftLeft]: [
             ':',
             '?',
             '*',

@@ -7,3 +7,5 @@ export const arrShuffle = <T>(array: T[]) => {
 
     return array;
 };
+
+export const arrUnique = <T>(array: T[]) => array.filter((value, index, array) => array.indexOf(value) === index);
