@@ -132,7 +132,9 @@ export const highlightsConfig: HighLightsType = {
             '<',
             '>',
             '?'
-        ]
+        ],
+
+        [Key.Space]: [' ']
     },
     [LOCALE.RU]: {
         [Key.IntlBackslash]: ['ё', 'Ё'],
@@ -237,7 +239,9 @@ export const highlightsConfig: HighLightsType = {
             'Б',
             'Ю',
             ','
-        ]
+        ],
+
+        [Key.Space]: [' ']
     },
     [LOCALE.UK]: {
         [Key.IntlBackslash]: ['\\', '/'],
@@ -342,6 +346,8 @@ export const highlightsConfig: HighLightsType = {
             'Б',
             'Ю',
             ','
-        ]
+        ],
+
+        [Key.Space]: [' ']
     }
 };

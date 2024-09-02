@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import SpeedIcon from '@mui/icons-material/Speed';
 import ErrorIcon from '@mui/icons-material/Error';
 import PercentIcon from '@mui/icons-material/Percent';
@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import store from '@/store';
 import styles from './style.module.scss';
 
-const TopBlock: React.FC = observer(() => {
+const TopBlock: FC = observer(() => {
     const { t } = useTranslation();
 
     return (

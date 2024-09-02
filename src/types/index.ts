@@ -15,12 +15,12 @@ export type SettingsType = {
 export type AppType = {
     isCapsLockEnabled: boolean;
     isDrawerOpened: boolean;
-    curExNum: number | null;
+    curExNum: number;
     exercises: ExerciseGeneralType
 };
 
 export type ExerciseGeneralType = {
-    [key in LOCALE]?: ExerciseType[]
+    [key in LOCALE]: ExerciseType[]
 };
 
 export type ExerciseType = {

@@ -8,7 +8,7 @@ import { arrShuffle } from '@/utils/common.util';
 
 type ExerciseParams = {
     lang: LOCALE;
-    curExNum: number | null;
+    curExNum: number;
     exercises: ExerciseGeneralType;
     isNumbersEnabled: boolean;
     isUpperCaseEnabled: boolean;
@@ -21,8 +21,8 @@ const useExercise = () => {
     const getExercise = useCallback(
         (lang: LOCALE, curExNum: number, isNumbersEnabled: boolean, isUpperCaseEnabled: boolean, isPunctuationEnabled: boolean) => {
             let chars = [];
-            const lettersConfig = letters[lang]?.[curExNum];
-            const capitalLettersConfig = capitalLetters[lang]?.[curExNum];
+            const lettersConfig = letters[lang][curExNum];
+            const capitalLettersConfig = capitalLetters[lang][curExNum];
             const symbolsConfig = symbols[lang];
             const numbersConfig = numbers;
 
@@ -62,7 +62,7 @@ const useExercise = () => {
             isUpperCaseEnabled !== prevParams.isUpperCaseEnabled ||
             isPunctuationEnabled !== prevParams.isPunctuationEnabled;
 
-        if (!letters[lang] || curExNum === null || !lang) {
+        if (!letters[lang] || !lang) {
             return;
         }
 
@@ -85,7 +85,7 @@ const useExercise = () => {
                 store.set('app', { ...store.app, exercises });
             }
         }
-    }, []);
+    }, [getExercise]);
 
     useEffect(() => {
         reaction(
@@ -99,7 +99,7 @@ const useExercise = () => {
             }),
             (params, prevParams) => setExercise(params, prevParams)
         );
-    }, []);
+    }, [setExercise]);
 
     return null;
 };

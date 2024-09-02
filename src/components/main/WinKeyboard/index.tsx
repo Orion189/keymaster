@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import styles from './style.module.scss';
 
-const WinKeyboard: React.FC = () => (
+const WinKeyboard: FC = () => (
     <div className={styles.cont}>
         <div className={styles.row}>
             <div className={styles.btnDefault}></div>

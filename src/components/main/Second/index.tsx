@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState, FC } from 'react';
 import { Link } from 'react-router-dom';
 
-const Second: React.FC = () => {
+const Second: FC = () => {
     const [count, setCount] = useState(0);
 
     return (

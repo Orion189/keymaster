@@ -161,21 +161,14 @@ const MacKeyboard: FC = observer(() => {
     const isCapsLockEnabled = store.app.isCapsLockEnabled;
     const isShowKeyHintEnabled = store.settings.isShowKeyHintEnabled;
     const isShowHandsHintEnabled = store.settings.isShowHandsHintEnabled;
-    const chars =
-        store.app.curExNum !== null ? store.app.exercises[store.settings.lang]?.[store.app.curExNum].chars : [];
-    const position =
-        store.app.curExNum !== null
-            ? store.app.exercises[store.settings.lang]?.[store.app.curExNum].position
-            : undefined;
-    const curChar = chars?.length && position !== undefined ? chars[position] : null;
+    const curChar = store.chars[store.position];
     const highlightsConf = highlightsConfig[store.settings.lang];
-    const uniqueChars = chars && arrUnique(chars);
     const getKeysToHighlight = useMemo(
         () => () => {
             const entries = Object.entries<string[]>(highlightsConf);
             const keys = [];
 
-            if (!curChar || !isShowKeyHintEnabled) {
+            if (!isShowKeyHintEnabled) {
                 return [];
             }
 
@@ -194,7 +187,7 @@ const MacKeyboard: FC = observer(() => {
             const entries = Object.entries<string[]>(highlightsConf);
             const keys: string[] = [];
 
-            uniqueChars?.forEach((uniqueChar) => {
+            arrUnique(store.chars).forEach((uniqueChar) => {
                 for (const [key, value] of entries) {
                     if (value.includes(uniqueChar)) {
                         keys.push(key);
@@ -204,20 +197,16 @@ const MacKeyboard: FC = observer(() => {
 
             return arrUnique(keys);
         },
-        [uniqueChars, highlightsConf]
+        [highlightsConf]
     );
-    const getFingersToHighLight = useMemo(
+    const getFingersToHighlight = useMemo(
         () => () => {
             const keysToHighlight = getKeysToHighlight();
             const entries = Object.entries<string[]>(fingersConfig);
             const fingers = [];
 
-            if (!isShowHandsHintEnabled) {
-                return [];
-            }
-
             for (const [key, value] of entries) {
-                const intersectedArray = value.filter(value => keysToHighlight.includes(value));
+                const intersectedArray = value.filter((value) => keysToHighlight.includes(value));
 
                 if (intersectedArray.length) {
                     fingers.push(key);
@@ -226,7 +215,7 @@ const MacKeyboard: FC = observer(() => {
 
             return fingers;
         },
-        [getKeysToHighlight, isShowHandsHintEnabled]
+        [getKeysToHighlight]
     );
 
     return (
@@ -242,7 +231,7 @@ const MacKeyboard: FC = observer(() => {
                     />
                 ))}
             </div>
-            <MacFingers fingersToHighLight={getFingersToHighLight()} />
+            {isShowHandsHintEnabled ? <MacFingers fingersToHighLight={getFingersToHighlight()} /> : null}
         </div>
     );
 });

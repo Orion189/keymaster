@@ -1,7 +1,7 @@
 import { LOCALE } from '@/enums';
 
 type LettersType = {
-    [key in LOCALE]?: string[][];
+    [key in LOCALE]: string[][];
 };
 
 type SymbolsType = {

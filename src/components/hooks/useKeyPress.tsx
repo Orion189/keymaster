@@ -1,13 +1,26 @@
 import { useState, useEffect, useCallback, KeyboardEvent } from 'react';
-import { reaction } from 'mobx';
+import { autorun } from 'mobx';
 import { Key } from '@/enums';
 import store from '@/store';
 
+type KeyParams = {
+    isDrawerOpened: boolean;
+    chars: string[],
+    position: number;
+    keyToPress: string;
+};
+
 const useKeyPress = () => {
-    const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+    const [params, setParams] = useState<KeyParams | undefined>(undefined);
     const onKeyDownHandler = useCallback((event: KeyboardEvent) => {
         const isCapsLockEnabled = event?.getModifierState('CapsLock');
 
+        if (!params) {
+            return;
+        }
+
+        const { isDrawerOpened, chars, position, keyToPress } = params;
+        
         if (isDrawerOpened) {
             return;
         }
@@ -15,12 +28,29 @@ const useKeyPress = () => {
         if (event.code === Key.CapsLock) {
             store.set('app', { ...store.app, isCapsLockEnabled });
         }
+        //console.log(event.code, event.key, keyToPress);
 
-        console.log(event.code, event.key);
-    }, [isDrawerOpened]);
+        if (event.key !== keyToPress) {
+            console.log('Error!');
+
+            return;
+        }
+
+        if (chars[position + 1]) {
+            store.position = position + 1;
+        } else {
+            store.position = -1; // TODO: move to the next exercise
+        }
+    }, [params]);
     const onKeyUpHandler = useCallback((event: KeyboardEvent) => {
         const isCapsLockEnabled = event?.getModifierState('CapsLock');
 
+        if (!params) {
+            return;
+        }
+
+        const { isDrawerOpened, curExNum, exercises, lang } = params;
+        
         if (isDrawerOpened) {
             return;
         }
@@ -28,13 +58,18 @@ const useKeyPress = () => {
         if (event.code === Key.CapsLock) {
             store.set('app', { ...store.app, isCapsLockEnabled });
         }
-    }, [isDrawerOpened]);
+    }, [params]);
 
     useEffect(() => {
-        reaction(
-            () => store.app.isDrawerOpened,
-            drawerOpened => setIsDrawerOpened(drawerOpened)
-        );
+        //store.reset();
+        autorun(() => {
+            setParams({
+                isDrawerOpened: store.app.isDrawerOpened,
+                chars: store.chars,
+                position: store.position,
+                keyToPress: store.keyToPress
+            });
+        });
     }, []);
 
     useEffect(() => {

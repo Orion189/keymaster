@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo, FC } from 'react';
 // import { Link } from 'react-router-dom';
 import TopBlock from '@components/main/TopBlock';
 import CenterBlock from '@components/main/CenterBlock';
@@ -6,7 +6,7 @@ import BottomBlock from '@components/main/BottomBlock';
 import useKeyPress from '@components/hooks/useKeyPress';
 import styles from './style.module.scss';
 
-const Home: React.FC = memo(() => {
+const Home: FC = memo(() => {
     useKeyPress();
  
     return (

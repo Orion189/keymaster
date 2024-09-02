@@ -9,7 +9,6 @@ import store from '@/store';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { letters } from '@/configs/lessons.config';
-import { Key } from '@/enums';
 import styles from './style.module.scss';
 
 type ExerciseProps = {
@@ -21,11 +20,11 @@ type ExerciseProps = {
 const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
     const { t } = useTranslation();
     const getLessonTitle = useCallback(
-        (lesson: Key[]) =>
+        (lesson: string[]) =>
             lesson
                 .join(' ')
                 .toLocaleLowerCase(),
-        [t]
+        []
     );
     const onClickExerciseHandler = useCallback(() => {
         if (index !== store.app.curExNum) {
@@ -65,12 +64,12 @@ const Exercises: FC = observer(() => {
     return (
         <Box className={styles.cont}>
             <List className={styles.list}>
-                {lessons?.map((lesson, index) => (
+                {lessons.map((lesson, index) => (
                     <Exercise
                         key={lesson.toString()}
                         lesson={lesson}
                         index={index}
-                        isLast={index === lessons?.length - 1}
+                        isLast={index === lessons.length - 1}
                     />
                 ))}
             </List>
