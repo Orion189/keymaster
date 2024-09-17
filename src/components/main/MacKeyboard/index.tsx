@@ -161,7 +161,7 @@ const MacKeyboard: FC = observer(() => {
     const isCapsLockEnabled = store.app.isCapsLockEnabled;
     const isShowKeyHintEnabled = store.settings.isShowKeyHintEnabled;
     const isShowHandsHintEnabled = store.settings.isShowHandsHintEnabled;
-    const curChar = store.chars[store.position];
+    const curChar = store.exersiseChars[store.exersisePosition];
     const highlightsConf = highlightsConfig[store.settings.lang];
     const getKeysToHighlight = useMemo(
         () => () => {
@@ -187,7 +187,7 @@ const MacKeyboard: FC = observer(() => {
             const entries = Object.entries<string[]>(highlightsConf);
             const keys: string[] = [];
 
-            arrUnique(store.chars).forEach((uniqueChar) => {
+            arrUnique(store.exersiseChars).forEach((uniqueChar) => {
                 for (const [key, value] of entries) {
                     if (value.includes(uniqueChar)) {
                         keys.push(key);

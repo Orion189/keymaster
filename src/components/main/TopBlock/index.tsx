@@ -22,7 +22,7 @@ const TopBlock: FC = observer(() => {
             <div className={styles.paramBlock}>
                 <PercentIcon className={styles.paramIcon} />
                 <div className={styles.paramDataCont}>
-                    <div className={styles.paramDataValue}>100</div>
+                    <div className={styles.paramDataValue}>{store.accurancy}</div>
                     <div className={styles.paramDataTitle}>{t('components.main.TopBlock.titles.accuracy')}</div>
                 </div>
             </div>

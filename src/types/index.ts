@@ -12,13 +12,6 @@ export type SettingsType = {
     isPunctuationEnabled: boolean
 };
 
-export type AppType = {
-    isCapsLockEnabled: boolean;
-    isDrawerOpened: boolean;
-    curExNum: number;
-    exercises: ExerciseGeneralType
-};
-
 export type ExerciseGeneralType = {
     [key in LOCALE]: ExerciseType[]
 };
@@ -26,6 +19,23 @@ export type ExerciseGeneralType = {
 export type ExerciseType = {
     chars: string[];
     position: number;
+};
+
+export type MistakeGeneralType = {
+    [key in LOCALE]: MistakeType[]
+};
+
+export type MistakeType = {
+    positions: number[];
+    amount: number;
+};
+
+export type AppType = {
+    isCapsLockEnabled: boolean;
+    isDrawerOpened: boolean;
+    curExNum: number;
+    exercises: ExerciseGeneralType,
+    mistakes: MistakeGeneralType
 };
 
 export type StoreValuesType = SettingsType | Partial<AppType>;

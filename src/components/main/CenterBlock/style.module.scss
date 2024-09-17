@@ -6,13 +6,18 @@
 }
 
 .charCont {
-    width: 1.2rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1.7rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .curChar {
     background-color: #5F75A4;
+}
+
+.mistake {
+    background-color: salmon;
 }

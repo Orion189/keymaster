@@ -7,9 +7,10 @@ import styles from './style.module.scss';
 type CharContProps = {
     char: string;
     isCurChar: boolean;
+    isMistake: boolean;
 };
 
-const CharCont: FC<CharContProps> = memo(({ char, isCurChar }) => {
+const CharCont: FC<CharContProps> = memo(({ char, isCurChar, isMistake }) => {
     const getCSS = useMemo(
         () => () => {
             const classes = [styles.charCont];
@@ -18,9 +19,13 @@ const CharCont: FC<CharContProps> = memo(({ char, isCurChar }) => {
                 classes.push(styles.curChar);
             }
 
+            if (isMistake) {
+                classes.push(styles.mistake);
+            }
+
             return clsx(classes);
         },
-        [isCurChar]
+        [isCurChar, isMistake]
     );
 
     return <div className={getCSS()}>{char}</div>;
@@ -28,8 +33,8 @@ const CharCont: FC<CharContProps> = memo(({ char, isCurChar }) => {
 
 const CenterBlock: FC = observer(() => (
     <div className={styles.cont}>
-        {store.chars.map((char, index) => (
-            <CharCont key={char + index} char={char} isCurChar={store.position === index} />
+        {store.exersiseChars.map((char, index) => (
+            <CharCont key={char + index} char={char} isCurChar={store.exersisePosition === index} isMistake={store.mistakePositions.includes(index)} />
         ))}
     </div>
 ));

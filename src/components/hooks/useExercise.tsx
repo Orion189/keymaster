@@ -2,13 +2,14 @@ import { useEffect, useCallback } from 'react';
 import { letters, numbers, capitalLetters, symbols } from '@/configs/lessons.config';
 import { reaction, autorun } from 'mobx';
 import { LOCALE } from '@/enums';
-import type { ExerciseGeneralType } from '@/types';
+import type { ExerciseGeneralType, MistakeGeneralType } from '@/types';
 import store from '@/store';
 import { arrShuffle } from '@/utils/common.util';
 
 type Exercise = {
     curExNum: number;
     exercises: ExerciseGeneralType;
+    mistakes: MistakeGeneralType;
 };
 
 type ExerciseParams = {
@@ -18,7 +19,7 @@ type ExerciseParams = {
     isPunctuationEnabled: boolean;
 };
 
-const STRING_LENGTH = 60;
+const STRING_LENGTH = 100;
 
 const useExercise = () => {
     const getExercise = useCallback(
@@ -66,7 +67,7 @@ const useExercise = () => {
     );
     const initExercise = useCallback(
         (params: Exercise & ExerciseParams) => {
-            const { lang, exercises, curExNum, isNumbersEnabled, isUpperCaseEnabled, isPunctuationEnabled } = params;
+            const { lang, exercises, mistakes, curExNum, isNumbersEnabled, isUpperCaseEnabled, isPunctuationEnabled } = params;
             const isExersiseEmpty =
                 exercises[lang].length === 0 ||
                 !exercises[lang][curExNum] ||
@@ -86,15 +87,24 @@ const useExercise = () => {
                 );
 
                 if (exercise) {
-                    const newExercises = exercises[lang].slice();
+                    const newExercises = [...exercises[lang]];
+                    const newMistakes = [...mistakes[lang]];
 
                     newExercises[curExNum] = exercise;
+                    newMistakes[curExNum] = {
+                        positions: [],
+                        amount: 0
+                    };
 
                     store.set('app', {
                         ...store.app,
                         exercises: {
                             ...exercises,
                             [lang]: newExercises
+                        },
+                        mistakes: {
+                            ...mistakes,
+                            [lang]: newMistakes
                         }
                     });
                 }
@@ -121,6 +131,11 @@ const useExercise = () => {
                     [LOCALE.EN]: [],
                     [LOCALE.UK]: [],
                     [LOCALE.RU]: []
+                },
+                mistakes: {
+                    [LOCALE.EN]: [],
+                    [LOCALE.UK]: [],
+                    [LOCALE.RU]: []
                 }
             });
         }
@@ -132,6 +147,7 @@ const useExercise = () => {
                 lang: store.settings.lang,
                 curExNum: store.app.curExNum,
                 exercises: store.app.exercises,
+                mistakes: store.app.mistakes,
                 isNumbersEnabled: store.settings.isNumbersEnabled,
                 isUpperCaseEnabled: store.settings.isUpperCaseEnabled,
                 isPunctuationEnabled: store.settings.isPunctuationEnabled

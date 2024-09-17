@@ -8,6 +8,7 @@ type KeyParams = {
     chars: string[],
     position: number;
     keyToPress: string;
+    mistakePositions: number[];
 };
 
 const useKeyPress = () => {
@@ -15,11 +16,11 @@ const useKeyPress = () => {
     const onKeyDownHandler = useCallback((event: KeyboardEvent) => {
         const isCapsLockEnabled = event?.getModifierState('CapsLock');
 
-        if (!params) {
+        if (!params || store.exersisePosition === -1) {
             return;
         }
 
-        const { isDrawerOpened, chars, position, keyToPress } = params;
+        const { isDrawerOpened, chars, position, keyToPress, mistakePositions } = params;
         
         if (isDrawerOpened) {
             return;
@@ -31,15 +32,14 @@ const useKeyPress = () => {
         //console.log(event.code, event.key, keyToPress);
 
         if (event.key !== keyToPress) {
-            console.log('Error!');
-
-            return;
+            store.mistakePositions = [...mistakePositions, position];
+            store.mistakeAmount += 1;
         }
 
         if (chars[position + 1]) {
-            store.position = position + 1;
+            store.exersisePosition = position + 1;
         } else {
-            store.position = -1; // TODO: move to the next exercise
+            store.exersisePosition = -1; // TODO: move to the next exercise
         }
     }, [params]);
     const onKeyUpHandler = useCallback((event: KeyboardEvent) => {
@@ -65,9 +65,10 @@ const useKeyPress = () => {
         autorun(() => {
             setParams({
                 isDrawerOpened: store.app.isDrawerOpened,
-                chars: store.chars,
-                position: store.position,
-                keyToPress: store.keyToPress
+                chars: store.exersiseChars,
+                position: store.exersisePosition,
+                keyToPress: store.keyToPress,
+                mistakePositions: store.mistakePositions
             });
         });
     }, []);

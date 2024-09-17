@@ -28,6 +28,11 @@ export const defaultState: {
             [LOCALE.EN]: [],
             [LOCALE.UK]: [],
             [LOCALE.RU]: []
+        },
+        mistakes: {
+            [LOCALE.EN]: [],
+            [LOCALE.UK]: [],
+            [LOCALE.RU]: []
         }
     }
 };
@@ -49,17 +54,29 @@ const store = makeObservable(
                 Object.assign(this, defaultState);
             }
         },
-        get chars(): string[] {
+        get exersiseChars(): string[] {
             return this.app.exercises[this.settings.lang][this.app.curExNum]?.chars || [];
         },
-        set chars(chars: string[]) {
+        set exersiseChars(chars: string[]) {
             this.app.exercises[this.settings.lang][this.app.curExNum].chars = chars;
         },
-        get position(): number {
+        get exersisePosition(): number {
             return this.app.exercises[this.settings.lang][this.app.curExNum]?.position || 0;
         },
-        set position(position: number) {
+        set exersisePosition(position: number) {
             this.app.exercises[this.settings.lang][this.app.curExNum].position = position;
+        },
+        get mistakePositions(): number[] {
+            return this.app.mistakes[this.settings.lang][this.app.curExNum]?.positions || [];
+        },
+        set mistakePositions(positions: number[]) {
+            this.app.mistakes[this.settings.lang][this.app.curExNum].positions = positions;
+        },
+        get mistakeAmount(): number {
+            return this.app.mistakes[this.settings.lang][this.app.curExNum]?.amount || 0;
+        },
+        set mistakeAmount(amount: number) {
+            this.app.mistakes[this.settings.lang][this.app.curExNum].amount = amount;
         },
         get keyToPress(): string {
             return (
@@ -67,6 +84,17 @@ const store = makeObservable(
                     this.app.exercises[this.settings.lang][this.app.curExNum]?.position
                 ] || ''
             );
+        },
+        get accurancy(): number {
+            if (this.exersisePosition === 0 || this.mistakeAmount === 0) {
+                return 100;
+            }
+
+            if (this.exersisePosition === -1) {
+                return 100 - Math.trunc(this.mistakeAmount * 100 / 99);
+            }
+            
+            return 100 - Math.trunc(this.mistakeAmount * 100 / this.exersisePosition);
         }
     },
     {
@@ -74,9 +102,12 @@ const store = makeObservable(
         app: observable,
         set: action,
         reset: action,
-        chars: computed,
-        position: computed,
-        keyToPress: computed
+        exersiseChars: computed,
+        exersisePosition: computed,
+        mistakePositions: computed,
+        mistakeAmount: computed,
+        keyToPress: computed,
+        accurancy: computed
     },
     { autoBind: true }
 );
