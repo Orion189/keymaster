@@ -54,13 +54,25 @@ const useExercise = () => {
                 chars.push(...symbolsConfig);
             }
 
-            chars.push(...Array.from(' '.repeat(10)));
+            chars = arrShuffle(chars);
 
-            chars = arrShuffle(chars).slice(0, STRING_LENGTH).join('').trim().split('');
+            let step = Math.trunc(Math.random() * 5 + 1);
+
+            for (let i = 0; i < chars.length; i += step) {
+                step = Math.trunc(Math.random() * 4 + 1);
+            
+                if (chars[i - 1] !== ' ' && chars[i + 1] !== ' ') {
+                    chars.splice(i, 1, ' ');
+                }
+            }
+
+            chars = chars.slice(0, STRING_LENGTH).join('').trim().split('');
 
             return {
                 chars,
-                position: 0
+                position: 0,
+                charTypedTime: 0,
+                charTypedSpeed: 0
             };
         },
         []

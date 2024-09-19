@@ -12,6 +12,7 @@ import Test from '@components/main/Test';
 import ErrorPage from '@components/pages/error';
 import useAppLang from '@components/hooks/useAppLang';
 import useExercise from '@components/hooks/useExercise';
+import useTypingSpeed from '@components/hooks/useTypingSpeed';
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createHashRouter(
 const App: FC = () => {
     useAppLang();
     useExercise();
+    useTypingSpeed();
 
     return (
         <React.StrictMode>

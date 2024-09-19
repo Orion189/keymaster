@@ -19,6 +19,8 @@ export type ExerciseGeneralType = {
 export type ExerciseType = {
     chars: string[];
     position: number;
+    charTypedTime: number;
+    charTypedSpeed: number;
 };
 
 export type MistakeGeneralType = {

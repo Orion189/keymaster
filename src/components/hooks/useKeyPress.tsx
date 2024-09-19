@@ -31,7 +31,9 @@ const useKeyPress = () => {
         }
         //console.log(event.code, event.key, keyToPress);
 
-        if (event.key !== keyToPress) {
+        if (event.key === keyToPress) {
+            store.charTypedTime = Date.now();
+        } else {
             store.mistakePositions = [...mistakePositions, position];
             store.mistakeAmount += 1;
         }

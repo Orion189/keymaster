@@ -66,6 +66,18 @@ const store = makeObservable(
         set exersisePosition(position: number) {
             this.app.exercises[this.settings.lang][this.app.curExNum].position = position;
         },
+        get charTypedTime(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.charTypedTime || 0;
+        },
+        set charTypedTime(charTypedTime: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].charTypedTime = charTypedTime;
+        },
+        get charTypedSpeed(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.charTypedSpeed || 0;
+        },
+        set charTypedSpeed(charTypedSpeed: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].charTypedSpeed = charTypedSpeed;
+        },
         get mistakePositions(): number[] {
             return this.app.mistakes[this.settings.lang][this.app.curExNum]?.positions || [];
         },
@@ -104,6 +116,8 @@ const store = makeObservable(
         reset: action,
         exersiseChars: computed,
         exersisePosition: computed,
+        charTypedTime: computed,
+        charTypedSpeed: computed,
         mistakePositions: computed,
         mistakeAmount: computed,
         keyToPress: computed,

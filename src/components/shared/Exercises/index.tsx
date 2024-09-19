@@ -28,6 +28,8 @@ const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
     );
     const onClickExerciseHandler = useCallback(() => {
         if (index !== store.app.curExNum) {
+            store.charTypedTime = 0;
+            store.charTypedSpeed = 0;
             store.set('app', { ...store.app, curExNum: index });
         }
     }, [index]);
