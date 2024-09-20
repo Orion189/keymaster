@@ -54,6 +54,7 @@ const store = makeObservable(
                 Object.assign(this, defaultState);
             }
         },
+        resetExersise(exNum: number) {},
         get exersiseChars(): string[] {
             return this.app.exercises[this.settings.lang][this.app.curExNum]?.chars || [];
         },
@@ -114,6 +115,7 @@ const store = makeObservable(
         app: observable,
         set: action,
         reset: action,
+        resetExersise: action,
         exersiseChars: computed,
         exersisePosition: computed,
         charTypedTime: computed,
