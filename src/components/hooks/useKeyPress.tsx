@@ -11,6 +11,8 @@ type KeyParams = {
     mistakePositions: number[];
 };
 
+const WORD_CHAR_COUNT = 5;
+
 const useKeyPress = () => {
     const [params, setParams] = useState<KeyParams | undefined>(undefined);
     const onKeyDownHandler = useCallback((event: KeyboardEvent) => {
@@ -33,6 +35,10 @@ const useKeyPress = () => {
 
         if (event.key === keyToPress) {
             store.charTypedTime = Date.now();
+
+            if (position % WORD_CHAR_COUNT === 0) {
+                store.wordTypedTime = Date.now();
+            }
         } else {
             store.mistakePositions = [...mistakePositions, position];
             store.mistakeAmount += 1;

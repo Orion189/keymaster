@@ -15,7 +15,7 @@ const TopBlock: FC = observer(() => {
             <div className={styles.paramBlock}>
                 <SpeedIcon className={styles.paramIcon} />
                 <div className={styles.paramDataCont}>
-                    <div className={styles.paramDataValue}>{store.charTypedSpeed}</div>
+                    <div className={styles.paramDataValue}>{store.typedSpeed}</div>
                     <div className={styles.paramDataTitle}>{t(`components.main.TopBlock.titles.typingSpeed.${store.settings.typingSpeed}`)}</div>
                 </div>
             </div>

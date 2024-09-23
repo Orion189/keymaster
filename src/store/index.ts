@@ -54,7 +54,15 @@ const store = makeObservable(
                 Object.assign(this, defaultState);
             }
         },
-        resetExersise(exNum: number) {},
+        resetExersise(exNum: number) {
+            this.app.exercises[this.settings.lang][exNum].chars = [];
+            this.app.exercises[this.settings.lang][exNum].position = 0;
+            this.app.exercises[this.settings.lang][exNum].typedSpeed = 0;
+            this.app.exercises[this.settings.lang][exNum].charTypedTime = 0;
+            this.app.exercises[this.settings.lang][exNum].wordTypedTime = 0;
+            this.app.mistakes[this.settings.lang][exNum].amount = 0;
+            this.app.mistakes[this.settings.lang][exNum].positions = [];
+        },
         get exersiseChars(): string[] {
             return this.app.exercises[this.settings.lang][this.app.curExNum]?.chars || [];
         },
@@ -73,11 +81,17 @@ const store = makeObservable(
         set charTypedTime(charTypedTime: number) {
             this.app.exercises[this.settings.lang][this.app.curExNum].charTypedTime = charTypedTime;
         },
-        get charTypedSpeed(): number {
-            return this.app.exercises[this.settings.lang][this.app.curExNum]?.charTypedSpeed || 0;
+        get wordTypedTime(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.wordTypedTime || 0;
         },
-        set charTypedSpeed(charTypedSpeed: number) {
-            this.app.exercises[this.settings.lang][this.app.curExNum].charTypedSpeed = charTypedSpeed;
+        set wordTypedTime(wordTypedTime: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].wordTypedTime = wordTypedTime;
+        },
+        get typedSpeed(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.typedSpeed || 0;
+        },
+        set typedSpeed(typedSpeed: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].typedSpeed = typedSpeed;
         },
         get mistakePositions(): number[] {
             return this.app.mistakes[this.settings.lang][this.app.curExNum]?.positions || [];
@@ -119,7 +133,8 @@ const store = makeObservable(
         exersiseChars: computed,
         exersisePosition: computed,
         charTypedTime: computed,
-        charTypedSpeed: computed,
+        wordTypedTime: computed,
+        typedSpeed: computed,
         mistakePositions: computed,
         mistakeAmount: computed,
         keyToPress: computed,

@@ -1,5 +1,7 @@
 import { FC, useCallback } from 'react';
-import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import ListItemButton from '@mui/material/ListItemButton';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -17,32 +19,34 @@ type ExerciseProps = {
     isLast: boolean;
 };
 
+type RefreshBtnProps = {
+    exNum: number;
+};
+
+const RefreshBtn: FC<RefreshBtnProps> = ({ exNum }) => {
+    const onClickHandler = useCallback(() => store.resetExersise(exNum), [exNum]);
+
+    return (
+        <Button variant="outlined" color="secondary" onClick={onClickHandler}>
+            <RefreshIcon />
+        </Button>
+    );
+};
+
 const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
     const { t } = useTranslation();
-    const getLessonTitle = useCallback(
-        (lesson: string[]) =>
-            lesson
-                .join(' ')
-                .toLocaleLowerCase(),
-        []
-    );
+    const getLessonTitle = useCallback((lesson: string[]) => lesson.join(' ').toLocaleLowerCase(), []);
     const onClickExerciseHandler = useCallback(() => {
         if (index !== store.app.curExNum) {
-            store.charTypedTime = 0;
-            store.charTypedSpeed = 0;
             store.set('app', { ...store.app, curExNum: index });
+            store.charTypedTime = 0;
+            store.wordTypedTime = 0;
+            store.typedSpeed = 0;
         }
     }, [index]);
 
     return (
-        <ListItem
-            disablePadding
-            secondaryAction={
-                <Typography variant="subtitle1" align="center">
-                    0%
-                </Typography>
-            }
-        >
+        <ListItem disablePadding secondaryAction={<RefreshBtn exNum={index} />}>
             <ListItemButton selected={store.app.curExNum === index} onClick={onClickExerciseHandler}>
                 {isLast ? (
                     <ListItemText

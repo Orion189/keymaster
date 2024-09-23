@@ -72,7 +72,8 @@ const useExercise = () => {
                 chars,
                 position: 0,
                 charTypedTime: 0,
-                charTypedSpeed: 0
+                wordTypedTime: 0,
+                typedSpeed: 0
             };
         },
         []

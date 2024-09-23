@@ -20,7 +20,8 @@ export type ExerciseType = {
     chars: string[];
     position: number;
     charTypedTime: number;
-    charTypedSpeed: number;
+    wordTypedTime: number;
+    typedSpeed: number;
 };
 
 export type MistakeGeneralType = {
