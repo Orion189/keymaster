@@ -22,23 +22,18 @@ export type ExerciseType = {
     charTypedTime: number;
     wordTypedTime: number;
     typedSpeed: number;
-};
-
-export type MistakeGeneralType = {
-    [key in LOCALE]: MistakeType[]
-};
-
-export type MistakeType = {
-    positions: number[];
-    amount: number;
+    typedSpeeds: number[];
+    mistakeAmount: number;
+    mistakePositions: number[];
+    resultTypedSpeed?: number;
+    resultMistakeAmount?: number;
 };
 
 export type AppType = {
     isCapsLockEnabled: boolean;
     isDrawerOpened: boolean;
     curExNum: number;
-    exercises: ExerciseGeneralType,
-    mistakes: MistakeGeneralType
+    exercises: ExerciseGeneralType
 };
 
 export type StoreValuesType = SettingsType | Partial<AppType>;

@@ -6,9 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { darkTheme } from '@/theme/dark';
 //import { lightTheme } from './theme/light';
 import Home from '@components/main/Home';
-import Second from '@components/main/Second';
-import Root from '@components/shared/layouts/Root';
-import Test from '@components/main/Test';
+import Results from '@components/main/Results';
+import RootLayout from '@components/shared/layouts/RootLayout';
 import ErrorPage from '@components/pages/error';
 import useAppLang from '@components/hooks/useAppLang';
 import useExercise from '@components/hooks/useExercise';
@@ -17,11 +16,10 @@ import useTypingSpeed from '@components/hooks/useTypingSpeed';
 const router = createHashRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+            <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
                 <Route index element={<Home />} />
-                <Route path="second" element={<Second />} />
             </Route>
-            <Route path="/test" element={<Test />} errorElement={<ErrorPage />} />
+            <Route path="/results" element={<Results />} errorElement={<ErrorPage />} />
         </>
     )
 );

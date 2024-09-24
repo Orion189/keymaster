@@ -1,13 +1,14 @@
 import { useCallback, FC, memo } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import SideMenu from '@components/shared/SideMenu';
 import store from '@/store';
 import styles from './style.module.scss';
 import { observer } from 'mobx-react-lite';
 
-const OpenDrawerBtn = observer(() => {
+const SettingsBtn = observer(() => {
     const openDrawer = useCallback(() => {
         store.set('app', { ...store.app, isDrawerOpened: true });
     }, []);
@@ -24,14 +25,23 @@ const OpenDrawerBtn = observer(() => {
     );
 });
 
-const Root: FC = memo(() => {
+const ResultsBtn = memo(() => (
+    <Link to={'/results'}>
+        <IconButton tabIndex={-1} className={styles.resultsBtn}>
+            <BarChartIcon fontSize="large" />
+        </IconButton>
+    </Link>
+));
+
+const RootLayout: FC = memo(() => {
     return (
         <div className={styles.cont}>
-            <OpenDrawerBtn />
+            <SettingsBtn />
             <SideMenu />
             <Outlet />
+            <ResultsBtn />
         </div>
     );
 });
 
-export default Root;
+export default RootLayout;

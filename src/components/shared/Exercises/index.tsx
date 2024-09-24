@@ -1,5 +1,4 @@
 import { FC, useCallback } from 'react';
-import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -42,6 +41,7 @@ const Exercise: FC<ExerciseProps> = observer(({ lesson, index, isLast }) => {
             store.charTypedTime = 0;
             store.wordTypedTime = 0;
             store.typedSpeed = 0;
+            store.typedSpeeds = [];
         }
     }, [index]);
 

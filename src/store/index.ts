@@ -28,11 +28,6 @@ export const defaultState: {
             [LOCALE.EN]: [],
             [LOCALE.UK]: [],
             [LOCALE.RU]: []
-        },
-        mistakes: {
-            [LOCALE.EN]: [],
-            [LOCALE.UK]: [],
-            [LOCALE.RU]: []
         }
     }
 };
@@ -55,13 +50,20 @@ const store = makeObservable(
             }
         },
         resetExersise(exNum: number) {
-            this.app.exercises[this.settings.lang][exNum].chars = [];
-            this.app.exercises[this.settings.lang][exNum].position = 0;
-            this.app.exercises[this.settings.lang][exNum].typedSpeed = 0;
-            this.app.exercises[this.settings.lang][exNum].charTypedTime = 0;
-            this.app.exercises[this.settings.lang][exNum].wordTypedTime = 0;
-            this.app.mistakes[this.settings.lang][exNum].amount = 0;
-            this.app.mistakes[this.settings.lang][exNum].positions = [];
+            const newExercises = [...this.app.exercises[this.settings.lang]];
+
+            newExercises[exNum] = {
+                ...this.app.exercises[this.settings.lang][exNum],
+                chars: []
+            };
+
+            this.set('app', {
+                ...this.app,
+                exercises: {
+                    ...this.app.exercises,
+                    [this.settings.lang]: newExercises
+                }
+            });
         },
         get exersiseChars(): string[] {
             return this.app.exercises[this.settings.lang][this.app.curExNum]?.chars || [];
@@ -93,17 +95,35 @@ const store = makeObservable(
         set typedSpeed(typedSpeed: number) {
             this.app.exercises[this.settings.lang][this.app.curExNum].typedSpeed = typedSpeed;
         },
+        get typedSpeeds(): number[] {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.typedSpeeds || [];
+        },
+        set typedSpeeds(typedSpeeds: number[]) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].typedSpeeds = typedSpeeds;
+        },
         get mistakePositions(): number[] {
-            return this.app.mistakes[this.settings.lang][this.app.curExNum]?.positions || [];
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.mistakePositions || [];
         },
         set mistakePositions(positions: number[]) {
-            this.app.mistakes[this.settings.lang][this.app.curExNum].positions = positions;
+            this.app.exercises[this.settings.lang][this.app.curExNum].mistakePositions = positions;
         },
         get mistakeAmount(): number {
-            return this.app.mistakes[this.settings.lang][this.app.curExNum]?.amount || 0;
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.mistakeAmount || 0;
         },
         set mistakeAmount(amount: number) {
-            this.app.mistakes[this.settings.lang][this.app.curExNum].amount = amount;
+            this.app.exercises[this.settings.lang][this.app.curExNum].mistakeAmount = amount;
+        },
+        get resultTypedSpeed(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.resultTypedSpeed || 0;
+        },
+        set resultTypedSpeed(resultTypedSpeed: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].resultTypedSpeed = resultTypedSpeed;
+        },
+        get resultMistakeAmount(): number {
+            return this.app.exercises[this.settings.lang][this.app.curExNum]?.resultMistakeAmount || 0;
+        },
+        set resultMistakeAmount(resultMistakeAmount: number) {
+            this.app.exercises[this.settings.lang][this.app.curExNum].resultMistakeAmount = resultMistakeAmount;
         },
         get keyToPress(): string {
             return (
@@ -116,11 +136,7 @@ const store = makeObservable(
             if (this.exersisePosition === 0 || this.mistakeAmount === 0) {
                 return 100;
             }
-
-            if (this.exersisePosition === -1) {
-                return 100 - Math.trunc(this.mistakeAmount * 100 / 99);
-            }
-            
+      
             return 100 - Math.trunc(this.mistakeAmount * 100 / this.exersisePosition);
         }
     },
@@ -135,8 +151,11 @@ const store = makeObservable(
         charTypedTime: computed,
         wordTypedTime: computed,
         typedSpeed: computed,
+        typedSpeeds: computed,
         mistakePositions: computed,
         mistakeAmount: computed,
+        resultTypedSpeed: computed,
+        resultMistakeAmount: computed,
         keyToPress: computed,
         accurancy: computed
     },

@@ -18,6 +18,7 @@
 		"@fontsource/roboto": "^5.0.13",
 		"@mui/icons-material": "^5.16.2",
 		"@mui/material": "^5.16.2",
+		"@mui/x-charts": "^7.18.0",
 		"@popperjs/core": "^2.11.8",
 		"clsx": "^2.1.1",
 		"i18next": "^23.12.2",

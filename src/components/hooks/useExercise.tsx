@@ -2,14 +2,13 @@ import { useEffect, useCallback } from 'react';
 import { letters, numbers, capitalLetters, symbols } from '@/configs/lessons.config';
 import { reaction, autorun } from 'mobx';
 import { LOCALE } from '@/enums';
-import type { ExerciseGeneralType, MistakeGeneralType } from '@/types';
+import type { ExerciseGeneralType } from '@/types';
 import store from '@/store';
 import { arrShuffle } from '@/utils/common.util';
 
 type Exercise = {
     curExNum: number;
     exercises: ExerciseGeneralType;
-    mistakes: MistakeGeneralType;
 };
 
 type ExerciseParams = {
@@ -19,7 +18,7 @@ type ExerciseParams = {
     isPunctuationEnabled: boolean;
 };
 
-const STRING_LENGTH = 100;
+const STRING_LENGTH = 10;
 
 const useExercise = () => {
     const getExercise = useCallback(
@@ -28,7 +27,9 @@ const useExercise = () => {
             curExNum: number,
             isNumbersEnabled: boolean,
             isUpperCaseEnabled: boolean,
-            isPunctuationEnabled: boolean
+            isPunctuationEnabled: boolean,
+            resultTypedSpeed: number,
+            resultMistakeAmount: number
         ) => {
             let chars = [];
             const lettersConfig = letters[lang][curExNum];
@@ -73,14 +74,19 @@ const useExercise = () => {
                 position: 0,
                 charTypedTime: 0,
                 wordTypedTime: 0,
-                typedSpeed: 0
+                typedSpeed: 0,
+                typedSpeeds: [],
+                mistakeAmount: 0,
+                mistakePositions: [],
+                resultTypedSpeed,
+                resultMistakeAmount
             };
         },
         []
     );
     const initExercise = useCallback(
         (params: Exercise & ExerciseParams) => {
-            const { lang, exercises, mistakes, curExNum, isNumbersEnabled, isUpperCaseEnabled, isPunctuationEnabled } = params;
+            const { lang, exercises, curExNum, isNumbersEnabled, isUpperCaseEnabled, isPunctuationEnabled } = params;
             const isExersiseEmpty =
                 exercises[lang].length === 0 ||
                 !exercises[lang][curExNum] ||
@@ -91,33 +97,28 @@ const useExercise = () => {
             }
 
             if (isExersiseEmpty) {
+                const resultTypedSpeed = exercises[lang][curExNum]?.resultTypedSpeed || 0;
+                const resultMistakeAmount = exercises[lang][curExNum]?.resultMistakeAmount || 0;
                 const exercise = getExercise(
                     lang,
                     curExNum,
                     isNumbersEnabled,
                     isUpperCaseEnabled,
-                    isPunctuationEnabled
+                    isPunctuationEnabled,
+                    resultTypedSpeed,
+                    resultMistakeAmount
                 );
 
                 if (exercise) {
                     const newExercises = [...exercises[lang]];
-                    const newMistakes = [...mistakes[lang]];
 
                     newExercises[curExNum] = exercise;
-                    newMistakes[curExNum] = {
-                        positions: [],
-                        amount: 0
-                    };
 
                     store.set('app', {
                         ...store.app,
                         exercises: {
                             ...exercises,
                             [lang]: newExercises
-                        },
-                        mistakes: {
-                            ...mistakes,
-                            [lang]: newMistakes
                         }
                     });
                 }
@@ -144,11 +145,6 @@ const useExercise = () => {
                     [LOCALE.EN]: [],
                     [LOCALE.UK]: [],
                     [LOCALE.RU]: []
-                },
-                mistakes: {
-                    [LOCALE.EN]: [],
-                    [LOCALE.UK]: [],
-                    [LOCALE.RU]: []
                 }
             });
         }
@@ -160,7 +156,6 @@ const useExercise = () => {
                 lang: store.settings.lang,
                 curExNum: store.app.curExNum,
                 exercises: store.app.exercises,
-                mistakes: store.app.mistakes,
                 isNumbersEnabled: store.settings.isNumbersEnabled,
                 isUpperCaseEnabled: store.settings.isUpperCaseEnabled,
                 isPunctuationEnabled: store.settings.isPunctuationEnabled

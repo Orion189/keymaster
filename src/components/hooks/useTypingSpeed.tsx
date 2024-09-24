@@ -22,6 +22,10 @@ const useTypingSpeed = () => {
                     const charTypedSpeed = Math.trunc(60 / delta);
 
                     store.typedSpeed = charTypedSpeed;
+                    
+                    if (charTypedSpeed !== 0) {
+                        store.typedSpeeds = [...store.typedSpeeds, charTypedSpeed];
+                    }
                 
                     break;
                 }
@@ -30,6 +34,10 @@ const useTypingSpeed = () => {
                     const wordTypedSpeed = Math.trunc(60 / delta);
 
                     store.typedSpeed = wordTypedSpeed;
+
+                    if (wordTypedSpeed !== 0) {
+                        store.typedSpeeds = [...store.typedSpeeds, wordTypedSpeed];
+                    }
                 
                     break;
                 }
