@@ -25,14 +25,22 @@ const useKeyPress = () => {
 
         const { isDrawerOpened, chars, position, keyToPress, mistakePositions, curExNum } = params;
         
-        if (isDrawerOpened) {
+        if (isDrawerOpened || event.code === Key.ShiftLeft || event.code === Key.ShiftRight) {
             return;
         }
 
         if (event.code === Key.CapsLock) {
             store.set('app', { ...store.app, isCapsLockEnabled });
+
+            return;
         }
-        //console.log(event.code, event.key, keyToPress);
+
+        if (event.code === Key.Backspace) {
+
+
+            return;
+        }
+        console.log(event.code, event.key, keyToPress);
 
         if (event.key === keyToPress) {
             store.charTypedTime = Date.now();

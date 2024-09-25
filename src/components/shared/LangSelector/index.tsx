@@ -23,6 +23,7 @@ const LangItem: FC<LangItemProps> = observer(({ lang, handleMenuClose }) => {
     const { t } = useTranslation();
     const onClickHandler = useCallback(() => {
         store.set('settings', { ...store.settings, lang });
+        store.resetExersise(store.app.curExNum);
 
         handleMenuClose();
     }, [handleMenuClose, lang]);

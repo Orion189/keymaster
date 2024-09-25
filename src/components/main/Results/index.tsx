@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { letters } from '@/configs/lessons.config';
 import { useTheme } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 import store from '@/store';
 import styles from './style.module.scss';
 
@@ -28,7 +29,8 @@ const BackBtn = memo(() => (
 
 const Chart: FC<ChartProps> = memo(({ data }) => {
     const theme = useTheme();
-    const labels = Array.from(Array(data.length), (_, i) => `Ex. ${i + 1}`);
+    const { t } = useTranslation();
+    const labels = Array.from(Array(data.length), (_, i) => `${t('components.main.Results.axies.x')} ${i + 1}`);
 
     return (
         <div className={styles.chartCont}>
@@ -37,7 +39,7 @@ const Chart: FC<ChartProps> = memo(({ data }) => {
                 yAxis={[
                     {
                         id: 'speed',
-                        label: 'Typed Speed',
+                        label: t('components.main.Results.axies.y'),
                         dataKey: 'typedSpeed'
                     }
                 ]}
@@ -52,13 +54,13 @@ const Chart: FC<ChartProps> = memo(({ data }) => {
                     {
                         dataKey: 'typedSpeed',
                         stack: 'assets',
-                        label: 'Avg. Typed Speed',
+                        label: t('components.main.Results.series.typedSpeed'),
                         color: theme.palette.info.main
                     },
                     {
                         dataKey: 'mistakeAmount',
                         stack: 'assets',
-                        label: 'Mistake Amount',
+                        label: t('components.main.Results.series.mistakeAmount'),
                         color: theme.palette.error.main
                     }
                 ]}

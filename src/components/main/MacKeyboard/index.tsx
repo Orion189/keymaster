@@ -116,8 +116,12 @@ const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, 
                 classes.push(styles.capsLockEnabled);
             }
 
-            if (keysToHighlight.includes(item)) {
+            if (keysToHighlight.includes(item) && ![Key.ShiftLeft, Key.ShiftRight].includes(item)) {
                 classes.push(styles.animatedBg);
+            }
+
+            if (keysToHighlight.includes(item) && [Key.ShiftLeft, Key.ShiftRight].includes(item)) {
+                classes.push(styles.staticBg);
             }
 
             if (keysToMakeBold.includes(item) && !makeBoldExceptionKeys.includes(item)) {

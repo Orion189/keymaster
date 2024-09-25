@@ -10,6 +10,16 @@
                     "accuracy": "accuracy",
                     "typos": "typos"
                 }
+            },
+            "Results": {
+                "axies": {
+                    "x": "Ex.",
+                    "y": "Typed Speed"
+                },
+                "series": {
+                    "typedSpeed": "Avg. Typed Speed",
+                    "mistakeAmount": "Mistake Amount"
+                }
             }
         },
         "shared": {

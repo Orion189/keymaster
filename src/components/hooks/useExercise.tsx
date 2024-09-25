@@ -18,7 +18,7 @@ type ExerciseParams = {
     isPunctuationEnabled: boolean;
 };
 
-const STRING_LENGTH = 10;
+const STRING_LENGTH = 100;
 
 const useExercise = () => {
     const getExercise = useCallback(
