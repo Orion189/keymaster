@@ -18,6 +18,7 @@ const useKeyPress = () => {
     const [params, setParams] = useState<KeyParams | undefined>(undefined);
     const onKeyDownHandler = useCallback((event: KeyboardEvent) => {
         const isCapsLockEnabled = event?.getModifierState('CapsLock');
+        const keysToNotTrack = [Key.Escape, Key.ShiftLeft, Key.Tab, Key.ControlLeft, Key.AltLeft, Key.MetaLeft, Key.AltRight, Key.MetaRight, Key.ShiftRight];
 
         if (!params) {
             return;
@@ -25,7 +26,7 @@ const useKeyPress = () => {
 
         const { isDrawerOpened, chars, position, keyToPress, mistakePositions, curExNum } = params;
         
-        if (isDrawerOpened || event.code === Key.ShiftLeft || event.code === Key.ShiftRight) {
+        if (isDrawerOpened || keysToNotTrack.includes(event.code as Key)) {
             return;
         }
 
@@ -35,8 +36,22 @@ const useKeyPress = () => {
             return;
         }
 
-        if (event.code === Key.Backspace) {
+        if (event.code === Key.Enter) {
+            store.resetExersise(curExNum);
 
+            return;
+        }
+
+        if (event.code === Key.Backspace && chars[position - 1]) {
+            const nextPos = position - 1;
+
+            store.exersisePosition = nextPos;
+
+            if (store.mistakePositions.includes(nextPos)) {
+                store.mistakePositions = store.mistakePositions.filter(mistakePosition => mistakePosition !== nextPos);
+                store.mistakeAmount -= 1;
+                store.resultMistakeAmount -= 1;
+            }
 
             return;
         }

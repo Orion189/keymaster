@@ -1,11 +1,12 @@
-@mixin mac_keyboard_btn($add_width) {
-    width: calc(4.5rem + $add_width);
-    height: 4.5rem;
-    border-radius: .5rem;
-    background-color: darkgray;
+.cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
-.cont {
+.keysCont {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,34 +22,228 @@
     align-items: center;
 }
 
-.btnDefault {
-    @include mac_keyboard_btn(0rem);
+@mixin win_keyboard_btn($add_width) {
+    width: calc(4.5rem + $add_width);
 }
 
-.btnDelete {
-    @include mac_keyboard_btn(2rem);
+.Default {
+    @include win_keyboard_btn(0rem);
+
+    height: 4.5rem;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: gray;
 }
 
-.btnTab {
-    @include mac_keyboard_btn(2rem);
+.Backspace {
+    @include win_keyboard_btn(2rem);
+
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnCapsLock {
-    @include mac_keyboard_btn(3.5rem);
+.Tab {
+    @include win_keyboard_btn(2rem);
+
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnEnter {
-    @include mac_keyboard_btn(3.5rem);
+.CapsLock {
+    @include win_keyboard_btn(3.5rem);
+
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+
+    &::before {
+        content: "•";
+        position: absolute;
+        color: white;
+        font-size: 2rem;
+        line-height: 1rem;
+        transform: translate(6.2rem, -1.25rem);
+    }
 }
 
-.btnShift {
-    @include mac_keyboard_btn(6rem);
+.capsLockEnabled {
+    &::before {
+        color: greenyellow;
+    }
 }
 
-.btnCmd {
-    @include mac_keyboard_btn(1rem);
+.Enter {
+    @include win_keyboard_btn(3.5rem);
+
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
 }
 
-.btnSpace {
-    @include mac_keyboard_btn(22rem);
+.ShiftLeft {
+    @include win_keyboard_btn(5.75rem);
+
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+.ShiftRight {
+    @include win_keyboard_btn(5.75rem);
+
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+.ControlLeft {
+    @include win_keyboard_btn(0rem);
+
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+.Fn {
+    @include win_keyboard_btn(0rem);
+
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: white;
+}
+
+.MetaLeft,
+.MetaRight {
+    @include win_keyboard_btn(1.1rem);
+}
+
+.MetaLeft,
+.MetaRight,
+.ControlRight,
+.AltLeft,
+.AltRight {
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: white;
+}
+
+.Space {
+    @include win_keyboard_btn(22rem);
+}
+
+.ArrowUp {
+    @include win_keyboard_btn(0rem);
+
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .9rem;
+}
+
+.ArrowUp,
+.ArrowDown,
+.ArrowLeft,
+.ArrowRight {
+    color: white;
+}
+
+.ArrowLeft,
+.ArrowRight {
+    font-size: .9rem;
+}
+
+.btnArrowUp {
+    @include win_keyboard_btn(0rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 2.1rem;
+    font-size: 1rem;
+}
+
+.btnArrowDown {
+    @include win_keyboard_btn(0rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid gray;
+    border-radius: .5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    height: 2.1rem;
+    font-size: 1rem;
+}
+
+.KeyF {
+    &::after {
+        content: "_";
+        position: absolute;
+        color: white;
+        transform: translateY(2rem);
+    }
+}
+
+.KeyJ {
+    &::after {
+        content: "_";
+        position: absolute;
+        color: white;
+        transform: translateY(2rem);
+    }
+}
+
+.staticBg {
+    background-color: #5F75A4;
+}
+
+.animatedBg {
+    animation: 1.5s linear 0s infinite bg;
+}
+
+.bold {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+@keyframes bg {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: #5F75A4;
+    }
+    100% {
+        background-color: transparent;
+    }
 }

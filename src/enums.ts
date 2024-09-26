@@ -1,4 +1,5 @@
 export const enum Key {
+    Escape = 'Escape',
     IntlBackslash = 'IntlBackslash',
     Digit1 = 'Digit1',
     Digit2 = 'Digit2',
@@ -61,8 +62,10 @@ export const enum Key {
     ControlLeft = 'ControlLeft',
     AltLeft = 'AltLeft',
     MetaLeft = 'MetaLeft',
+    Win = 'Win',
     Space = 'Space',
     MetaRight = 'MetaRight',
+    ControlRight = 'ControlRight',
     AltRight = 'AltRight',
     ArrowLeft = 'ArrowLeft',
     ArrowUp = 'ArrowUp',

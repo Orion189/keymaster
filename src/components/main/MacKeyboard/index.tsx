@@ -1,4 +1,4 @@
-import { FC, memo, useMemo } from 'react';
+import { FC, memo, useCallback, useMemo } from 'react';
 import { Key } from '@/enums';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
@@ -107,6 +107,7 @@ const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, 
     const getCSS = useMemo(
         () => (item: Key) => {
             const classes = [styles.Default];
+            const shifts = [Key.ShiftLeft, Key.ShiftRight];
 
             if (styles[item]) {
                 classes.push(styles[item]);
@@ -116,11 +117,11 @@ const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, 
                 classes.push(styles.capsLockEnabled);
             }
 
-            if (keysToHighlight.includes(item) && ![Key.ShiftLeft, Key.ShiftRight].includes(item)) {
+            if (keysToHighlight.includes(item) && !shifts.includes(item)) {
                 classes.push(styles.animatedBg);
             }
 
-            if (keysToHighlight.includes(item) && [Key.ShiftLeft, Key.ShiftRight].includes(item)) {
+            if (keysToHighlight.includes(item) && shifts.includes(item)) {
                 classes.push(styles.staticBg);
             }
 
@@ -132,17 +133,25 @@ const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, 
         },
         [isCapsLockEnabled, keysToHighlight, keysToMakeBold]
     );
+    const getItem = useCallback(() => {
+        switch (item) {
+            case Key.ArrowUp: {
+                return (
+                    <>
+                        <div className={styles.btnArrowUp}>{t(`common.keyboard.mac.keys.${item}`)}</div>
+                        <div className={styles.btnArrowDown}>{t('common.keyboard.mac.keys.ArrowDown')}</div>
+                    </>
+                );
+            }
+            default: {
+                return <div>{t(`common.keyboard.mac.keys.${item}`)}</div>;
+            }
+        }
+    }, [t, item]);
 
     return (
         <div key={item} className={getCSS(item)}>
-            {item === Key.ArrowUp ? (
-                <>
-                    <div className={styles.btnArrowUp}>{t(`common.keyboard.keys.${item}`)}</div>
-                    <div className={styles.btnArrowDown}>{t('common.keyboard.keys.ArrowDown')}</div>
-                </>
-            ) : (
-                <div>{t(`common.keyboard.keys.${item}`)}</div>
-            )}
+            {getItem()}
         </div>
     );
 });
