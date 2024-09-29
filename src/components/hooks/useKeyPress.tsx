@@ -50,12 +50,10 @@ const useKeyPress = () => {
             if (store.mistakePositions.includes(nextPos)) {
                 store.mistakePositions = store.mistakePositions.filter(mistakePosition => mistakePosition !== nextPos);
                 store.mistakeAmount -= 1;
-                store.resultMistakeAmount -= 1;
             }
 
             return;
         }
-        console.log(event.code, event.key, keyToPress);
 
         if (event.key === keyToPress) {
             store.charTypedTime = Date.now();

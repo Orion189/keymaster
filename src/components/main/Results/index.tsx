@@ -31,6 +31,8 @@ const Chart: FC<ChartProps> = memo(({ data }) => {
     const theme = useTheme();
     const { t } = useTranslation();
     const labels = Array.from(Array(data.length), (_, i) => `${t('components.main.Results.axies.x')} ${i + 1}`);
+    const width = window.screen.availWidth > 1800 ? 1024 : 800;
+    const height = window.screen.availHeight > 1100 ? 768 : 600;
 
     return (
         <div className={styles.chartCont}>
@@ -64,8 +66,8 @@ const Chart: FC<ChartProps> = memo(({ data }) => {
                         color: theme.palette.error.main
                     }
                 ]}
-                width={800}
-                height={600}
+                width={width}
+                height={height}
             />
         </div>
     );
