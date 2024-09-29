@@ -3,7 +3,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15rem;
+    margin-bottom: 10rem;
+}
+
+@media (width > 1800px) {
+    .cont {
+        margin-bottom: 15rem;
+    }
 }
 
 .paramBlock {
