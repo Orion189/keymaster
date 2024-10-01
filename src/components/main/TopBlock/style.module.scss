@@ -6,6 +6,12 @@
     margin-bottom: 10rem;
 }
 
+@media (width < 1500px) {
+    .cont {
+        margin-bottom: 5rem;
+    }
+}
+
 @media (width > 1800px) {
     .cont {
         margin-bottom: 15rem;

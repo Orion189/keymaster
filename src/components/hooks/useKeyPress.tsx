@@ -84,7 +84,7 @@ const useKeyPress = () => {
             return;
         }
 
-        const { isDrawerOpened, curExNum, exercises, lang } = params;
+        const { isDrawerOpened } = params;
         
         if (isDrawerOpened) {
             return;

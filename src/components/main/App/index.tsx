@@ -4,14 +4,18 @@ import { ThemeProvider } from '@mui/material/styles';
 import { StyledEngineProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { darkTheme } from '@/theme/dark';
-//import { lightTheme } from './theme/light';
+import { lightTheme } from '@/theme/light';
 import Home from '@components/main/Home';
 import Results from '@components/main/Results';
 import RootLayout from '@components/shared/layouts/RootLayout';
 import ErrorPage from '@components/pages/error';
 import useAppLang from '@components/hooks/useAppLang';
+import useAppTheme from '@components/hooks/useAppTheme';
 import useExercise from '@components/hooks/useExercise';
 import useTypingSpeed from '@components/hooks/useTypingSpeed';
+import { observer } from 'mobx-react-lite';
+import store from '@/store';
+import { THEME } from '@/enums';
 
 const router = createHashRouter(
     createRoutesFromElements(
@@ -24,21 +28,24 @@ const router = createHashRouter(
     )
 );
 
-const App: FC = () => {
+const App: FC = observer(() => {
+    const theme = store.settings.theme === THEME.DARK ? darkTheme : lightTheme;
+
     useAppLang();
+    useAppTheme();
     useExercise();
     useTypingSpeed();
 
     return (
         <React.StrictMode>
             <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={darkTheme}>
+                <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <RouterProvider router={router} />
                 </ThemeProvider>
             </StyledEngineProvider>
         </React.StrictMode>
     );
-};
+});
 
 export default App;

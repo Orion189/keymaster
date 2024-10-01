@@ -1,14 +1,31 @@
-import { app, BrowserWindow } from 'electron/main';
+import { app, BrowserWindow, ipcMain, nativeTheme, screen } from 'electron/main';
+import * as path from 'path';
+
+const __dirname = import.meta.dirname;
 
 const createWindow = () => {
+    const primaryDisplay = screen.getPrimaryDisplay();
+    const { width, height } = primaryDisplay.workAreaSize;
     const win = new BrowserWindow({
-        width: 800,
-        height: 600
+        minWidth: width,
+        minHeight: height,
+        show: false,
+        //resizable: false,
+        fullscreen: true,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        }
     });
 
+    nativeTheme.addListener('updated', () => win.webContents.send('update-theme'));
+
+    win.maximize();
     win.loadFile('./dist/index.html');
-    win.webContents.openDevTools(); // TODO: remove before release
+    win.show();
+    //win.webContents.openDevTools(); // TODO: remove before release
 };
+
+ipcMain.handle('shouldUseDarkColors', () => nativeTheme.shouldUseDarkColors);
 
 app.whenReady().then(() => {
     createWindow();
