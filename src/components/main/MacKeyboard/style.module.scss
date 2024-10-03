@@ -1,3 +1,5 @@
+@import '@/theme/variables.scss';
+
 .cont {
     display: flex;
     flex-direction: column;
@@ -37,7 +39,6 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    color: gray;
 }
 
 .Backspace {
@@ -47,7 +48,6 @@
     align-items: flex-end;
     padding-right: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .Tab {
@@ -57,7 +57,6 @@
     align-items: flex-end;
     padding-left: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .CapsLock {
@@ -67,12 +66,10 @@
     align-items: flex-end;
     padding-left: 0.5rem;
     font-size: 1rem;
-    color: white;
 
     &::before {
         content: "•";
         position: absolute;
-        color: white;
         font-size: 2rem;
         line-height: 1rem;
         transform: translate(0rem, -2.75rem);
@@ -92,7 +89,6 @@
     align-items: flex-end;
     padding-right: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .ShiftLeft {
@@ -102,7 +98,6 @@
     align-items: flex-end;
     padding-left: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .ShiftRight {
@@ -112,7 +107,6 @@
     align-items: flex-end;
     padding-right: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .Fn {
@@ -122,7 +116,6 @@
     align-items: flex-end;
     padding-left: 0.5rem;
     font-size: 1rem;
-    color: white;
 }
 
 .MetaLeft,
@@ -138,7 +131,6 @@
     justify-content: center;
     align-items: flex-end;
     font-size: 1rem;
-    color: white;
 }
 
 .Space {
@@ -154,13 +146,6 @@
     justify-content: space-between;
     align-items: center;
     font-size: .9rem;
-}
-
-.ArrowUp,
-.ArrowDown,
-.ArrowLeft,
-.ArrowRight {
-    color: white;
 }
 
 .ArrowLeft,
@@ -200,7 +185,6 @@
     &::after {
         content: "_";
         position: absolute;
-        color: white;
         transform: translateY(2rem);
     }
 }
@@ -209,13 +193,12 @@
     &::after {
         content: "_";
         position: absolute;
-        color: white;
         transform: translateY(2rem);
     }
 }
 
 .staticBg {
-    background-color: #5F75A4;
+    background-color: $staticBgColor;
 }
 
 .animatedBg {
@@ -224,7 +207,6 @@
 
 .bold {
     font-weight: bold;
-    color: #ffffff;
 }
 
 @keyframes bg {
@@ -232,7 +214,7 @@
         background-color: transparent;
     }
     50% {
-        background-color: #5F75A4;
+        background-color: $staticBgColor;
     }
     100% {
         background-color: transparent;

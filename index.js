@@ -17,12 +17,12 @@ const createWindow = () => {
         }
     });
 
-    nativeTheme.addListener('updated', () => win.webContents.send('update-theme'));
+    nativeTheme.addListener('updated', () => win.webContents.send('update'));
 
     win.maximize();
     win.loadFile('./dist/index.html');
     win.show();
-    //win.webContents.openDevTools(); // TODO: remove before release
+    //win.webContents.openDevTools();
 };
 
 ipcMain.handle('shouldUseDarkColors', () => nativeTheme.shouldUseDarkColors);

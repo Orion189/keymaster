@@ -7,6 +7,7 @@ import { arrUnique } from '@/utils/common.util';
 import MacFingers from '@/components/main/MacFingers';
 import { highlightsConfig, makeBoldExceptionKeys } from '@/configs/highlights.config';
 import { fingersConfig } from '@/configs/fingers.config';
+import { useTheme } from '@mui/material/styles';
 import clsx from 'clsx';
 import styles from './style.module.scss';
 
@@ -104,6 +105,7 @@ const rowItems5 = [
 
 const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, keysToMakeBold }) => {
     const { t } = useTranslation();
+    const theme = useTheme();
     const getCSS = useMemo(
         () => (item: Key) => {
             const classes = [styles.Default];
@@ -150,7 +152,7 @@ const KeyItem: FC<KeyProps> = memo(({ item, isCapsLockEnabled, keysToHighlight, 
     }, [t, item]);
 
     return (
-        <div key={item} className={getCSS(item)}>
+        <div key={item} className={getCSS(item)} style={{ color: theme.palette.text.secondary }}>
             {getItem()}
         </div>
     );

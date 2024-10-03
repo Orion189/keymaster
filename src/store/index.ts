@@ -11,7 +11,7 @@ export const defaultState: {
 } = {
     settings: {
         lang: LOCALE.EN,
-        theme: THEME.LIGHT,
+        theme: THEME.DARK,
         typingSpeed: TYPING_SPEED.CHARACTERS,
         isShowKeyHintEnabled: true,
         isShowHandsHintEnabled: true,

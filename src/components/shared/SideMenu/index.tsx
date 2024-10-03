@@ -29,8 +29,8 @@ const SideMenu: FC = observer(() => {
     };
 
     return (
-        <Drawer open={store.app.isDrawerOpened} onClose={closeDrawer} PaperProps={{ className: styles.cont }}>
-            <Container>
+        <Drawer open={store.app.isDrawerOpened} onClose={closeDrawer} PaperProps={{ className: styles.drawerCont }}>
+            <Container className={styles.cont}>
                 <Tabs value={value} onChange={handleChange} variant="fullWidth">
                     <Tab label={t('components.shared.SideMenu.sections.exercises.title')} />
                     <Tab label={t('components.shared.SideMenu.sections.settings.title')} />

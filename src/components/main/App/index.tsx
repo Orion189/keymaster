@@ -29,7 +29,7 @@ const router = createHashRouter(
 );
 
 const App: FC = observer(() => {
-    const theme = store.settings.theme === THEME.DARK ? darkTheme : lightTheme;
+    const theme = store.settings.theme === THEME.LIGHT ? lightTheme : darkTheme;
 
     useAppLang();
     useAppTheme();
