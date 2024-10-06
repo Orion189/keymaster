@@ -1,5 +1,6 @@
 {
   "name": "keymaster",
+  "repository": "https://github.com/Orion189/keymaster",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -13,7 +14,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-	"publish": "electron-forge publish"
+    "publish": "electron-forge publish"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -24,6 +25,7 @@
     "@mui/x-charts": "^7.18.0",
     "@popperjs/core": "^2.11.8",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.1",
     "i18next": "^23.12.2",
     "mobx": "^6.13.1",
@@ -32,7 +34,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.0",
-    "react-router-dom": "^6.24.1"
+    "react-router-dom": "^6.24.1",
+    "update-electron-app": "^3.0.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.5.0",
@@ -56,6 +59,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "prettier": "3.3.3",
     "sass": "^1.77.8",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
   },

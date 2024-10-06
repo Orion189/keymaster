@@ -1,4 +1,5 @@
 import { app, BrowserWindow, ipcMain, nativeTheme, screen } from 'electron/main';
+import { updateElectronApp } from 'update-electron-app';
 import * as path from 'path';
 
 const __dirname = import.meta.dirname;
@@ -28,6 +29,7 @@ const createWindow = () => {
 ipcMain.handle('shouldUseDarkColors', () => nativeTheme.shouldUseDarkColors);
 
 app.whenReady().then(() => {
+    updateElectronApp();
     createWindow();
 
     app.on('activate', () => {
