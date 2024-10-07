@@ -1,11 +1,35 @@
 import type { ForgeConfig } from '@electron-forge/shared-types';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
+import * as path from 'node:path';
 import 'dotenv/config';
 
 const config: ForgeConfig = {
     packagerConfig: {
-        asar: true
+        name: 'KeyMaster',
+        executableName: 'key-master',
+        appBundleId: 'com.keymaster',
+        asar: true,
+        appCategoryType: 'public.app-category.education',
+        icon: path.resolve(__dirname, 'public', 'icons', 'logo'),
+        protocols: [
+            {
+                name: 'KeyMaster Launch Protocol',
+                schemes: ['key-master']
+            }
+        ],
+        win32metadata: {
+            CompanyName: 'Yevhen Lepekha',
+            OriginalFilename: 'KeyMaster'
+        },
+        osxSign: {
+            identity: `Developer ID Application: Yevhen Lepekha (${process.env.APPLE_TEAM_ID})`
+        },
+        osxNotarize: {
+            appleId: process.env.APPLE_ID,
+            appleIdPassword: process.env.APPLE_PASSWORD,
+            teamId: process.env.APPLE_TEAM_ID
+        }
     },
     rebuildConfig: {},
     makers: [
@@ -17,14 +41,6 @@ const config: ForgeConfig = {
             name: '@electron-forge/maker-zip',
             config: {},
             platforms: ['darwin']
-        },
-        {
-            name: '@electron-forge/maker-deb',
-            config: {}
-        },
-        {
-            name: '@electron-forge/maker-rpm',
-            config: {}
         }
     ],
     plugins: [

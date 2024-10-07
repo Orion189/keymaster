@@ -1,9 +1,11 @@
 {
   "name": "keymaster",
+  "author": "Yevhen Lepekha",
+  "description": "Easy tool to train your typing skill",
+  "productName": "KeyMaster",
   "repository": "https://github.com/Orion189/keymaster",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
