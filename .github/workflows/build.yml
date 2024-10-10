@@ -18,10 +18,12 @@ jobs:
       - name: Add MacOS certs
         env:
           MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ''
         run: chmod +x tools/add-osx-cert.sh && . ./tools/add-osx-cert.sh
       - name: Publish app
         env:
           VITE_NONCE: ${{ secrets.VITE_NONCE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_ID: ${{ secrets.APPLE_ID }}

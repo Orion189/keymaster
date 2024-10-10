@@ -23,7 +23,8 @@ const config: ForgeConfig = {
             OriginalFilename: 'KeyMaster'
         },
         osxSign: {
-            identity: `Developer ID Application: Yevhen Lepekha (${process.env.APPLE_TEAM_ID})`
+            identity: 'Developer ID Application: Yevhen Lepekha (98YLRBNZQ9)',
+            
         }
     },
     rebuildConfig: {},
@@ -68,7 +69,7 @@ const config: ForgeConfig = {
         return;
     }
 
-    if (!process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD) {
+    if (!process.env.APPLE_ID || !process.env.APPLE_PASSWORD || !process.env.APPLE_TEAM_ID) {
         console.warn(
             'Should be notarizing, but environment variables APPLE_ID or APPLE_ID_PASSWORD, or APPLE_TEAM_ID are missing!'
         );
@@ -84,7 +85,7 @@ const config: ForgeConfig = {
 
 (() => {
     if (!process.env.CI) {
-        console.log('Not in CI, skipping notarization');
+        console.log('Not in CI, skipping publishing to GitHub');
         return;
     }
 
