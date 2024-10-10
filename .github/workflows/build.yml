@@ -4,15 +4,8 @@ on:
     branches:
       - main
 jobs:
-  build:
-    strategy:
-      matrix:
-        os:
-          [
-            { name: 'windows', image: 'windows-latest' },
-            { name: 'macos', image: 'macos-latest' },
-          ]
-    runs-on: ${{ matrix.os.image }}
+  build-macos:
+    runs-on: 'macos-latest'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,11 +15,15 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
+      - name: Add MacOS certs
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+        run: chmod +x tools/add-osx-cert.sh && . ./tools/add-osx-cert.sh
       - name: Publish app
         env:
           VITE_NONCE: ${{ secrets.VITE_NONCE }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
+          CI: true
         run: npm run publish
