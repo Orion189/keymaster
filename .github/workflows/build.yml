@@ -20,6 +20,10 @@ jobs:
           MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
           MACOS_CERT_PASSWORD: ''
         run: chmod +x tools/add-osx-cert.sh && . ./tools/add-osx-cert.sh
+      - name: Build app
+        env:
+          VITE_NONCE: ${{ secrets.VITE_NONCE }}
+        run: npm run build
       - name: Publish app
         env:
           VITE_NONCE: ${{ secrets.VITE_NONCE }}

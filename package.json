@@ -6,7 +6,7 @@
   "repository": "https://github.com/Orion189/keymaster",
   "private": true,
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
