@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 out/
+
+tools/development.provisionprofile
+public/icon.iconset

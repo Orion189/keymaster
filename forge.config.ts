@@ -4,40 +4,71 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 import * as path from 'node:path';
 import 'dotenv/config';
 
+const isMacAppStoreSubmission = process.env.SUBMISSION_TYPE;
+const identity = isMacAppStoreSubmission
+    ? `3rd Party Mac Developer Installer: Yevhen Lepekha (${process.env.APPLE_TEAM_ID})`
+    : `Developer ID Application: Yevhen Lepekha (${process.env.APPLE_TEAM_ID})`;
 const config: ForgeConfig = {
     packagerConfig: {
-        name: 'KeyMaster',
+        name: 'KMaster',
         executableName: 'key-master',
         appBundleId: 'com.orion189.keymaster',
+        appVersion: '1.0.0',
+        buildVersion: '1.0.0',
         asar: true,
         appCategoryType: 'public.app-category.education',
-        icon: path.resolve(__dirname, 'public', 'icons', 'logo'),
+        icon: path.resolve(__dirname, 'public', 'icons', 'icon'),
+        /*extendInfo: {},*/
         protocols: [
             {
-                name: 'KeyMaster Launch Protocol',
+                name: 'KMaster Launch Protocol',
                 schemes: ['key-master']
             }
         ],
         win32metadata: {
             CompanyName: 'Yevhen Lepekha',
-            OriginalFilename: 'KeyMaster'
+            OriginalFilename: 'KMaster'
         },
         osxSign: {
-            identity: 'Developer ID Application: Yevhen Lepekha (98YLRBNZQ9)',
-            
+            /*identity,
+            type: isMacAppStoreSubmission ? 'distribution' : 'development',
+            provisioningProfile: path.resolve(__dirname, 'tools', 'distribution.provisionprofile'),
+            optionsForFile: (filePath) => {
+                const entitlements = filePath.includes('.app/')
+                    ? path.resolve(__dirname, 'tools', 'entitlements.mas.child.plist')
+                    : path.resolve(__dirname, 'tools', 'entitlements.mas.plist');
+
+                return {
+                    hardenedRuntime: false,
+                    entitlements
+                };
+            },*/
         }
     },
     rebuildConfig: {},
     makers: [
         {
+            name: '@electron-forge/maker-zip',
+            config: {},
+            platforms: ['darwin', 'mas']
+        },
+        {
+            name: '@electron-forge/maker-pkg',
+            config: {
+                identity
+            },
+            platforms: ['darwin', 'mas']
+        }/*,
+        {
             name: '@electron-forge/maker-squirrel',
             config: {}
         },
         {
-            name: '@electron-forge/maker-zip',
-            config: {},
-            platforms: ['darwin']
-        }
+            name: '@electron-forge/maker-dmg',
+            config: {
+                format: 'ULFO'
+            }
+        }*/
     ],
     plugins: [
         {
@@ -60,12 +91,7 @@ const config: ForgeConfig = {
 };
 
 (() => {
-    if (process.platform !== 'darwin') {
-        return;
-    }
-
-    if (!process.env.CI) {
-        console.log('Not in CI, skipping notarization');
+    if (process.platform !== 'darwin' || isMacAppStoreSubmission) {
         return;
     }
 

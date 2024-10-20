@@ -2,9 +2,8 @@
   "name": "keymaster",
   "author": "Yevhen Lepekha",
   "description": "Easy tool to train your typing skill",
-  "productName": "KeyMaster",
+  "productName": "KMaster",
   "repository": "https://github.com/Orion189/keymaster",
-  "private": true,
   "version": "1.0.0",
   "main": "index.mjs",
   "scripts": {
@@ -15,7 +14,7 @@
     "preview": "vite preview",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "electron-forge make --platform=mas --arch=x64",
     "publish": "electron-forge publish"
   },
   "dependencies": {
@@ -42,6 +41,8 @@
   "devDependencies": {
     "@electron-forge/cli": "^7.5.0",
     "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-dmg": "^7.5.0",
+    "@electron-forge/maker-pkg": "^7.5.0",
     "@electron-forge/maker-rpm": "^7.5.0",
     "@electron-forge/maker-squirrel": "^7.5.0",
     "@electron-forge/maker-zip": "^7.5.0",
