@@ -1,4 +1,4 @@
-@import '@/theme/variables.scss';
+@use '@/theme/variables';
 
 .cont {
     display: flex;
@@ -206,7 +206,7 @@
 }
 
 .staticBg {
-    background-color: $staticBgColor;
+    background-color: variables.$staticBgColor;
 }
 
 .animatedBg {
@@ -222,7 +222,7 @@
         background-color: transparent;
     }
     50% {
-        background-color: $staticBgColor;
+        background-color: variables.$staticBgColor;
     }
     100% {
         background-color: transparent;

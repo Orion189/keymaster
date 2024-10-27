@@ -11,14 +11,13 @@ const identity = isMacAppStoreSubmission
 const config: ForgeConfig = {
     packagerConfig: {
         name: 'KMaster',
-        executableName: 'key-master',
+        executableName: 'KMaster',
         appBundleId: 'com.orion189.keymaster',
         appVersion: '1.0.0',
         buildVersion: '1.0.0',
         asar: true,
         appCategoryType: 'public.app-category.education',
         icon: path.resolve(__dirname, 'public', 'icons', 'icon'),
-        /*extendInfo: {},*/
         protocols: [
             {
                 name: 'KMaster Launch Protocol',
@@ -30,19 +29,8 @@ const config: ForgeConfig = {
             OriginalFilename: 'KMaster'
         },
         osxSign: {
-            /*identity,
-            type: isMacAppStoreSubmission ? 'distribution' : 'development',
-            provisioningProfile: path.resolve(__dirname, 'tools', 'distribution.provisionprofile'),
-            optionsForFile: (filePath) => {
-                const entitlements = filePath.includes('.app/')
-                    ? path.resolve(__dirname, 'tools', 'entitlements.mas.child.plist')
-                    : path.resolve(__dirname, 'tools', 'entitlements.mas.plist');
-
-                return {
-                    hardenedRuntime: false,
-                    entitlements
-                };
-            },*/
+            identity,
+            provisioningProfile: path.resolve(__dirname, 'tools', 'Developer_ID_Application.provisionprofile')
         }
     },
     rebuildConfig: {},
@@ -50,25 +38,8 @@ const config: ForgeConfig = {
         {
             name: '@electron-forge/maker-zip',
             config: {},
-            platforms: ['darwin', 'mas']
-        },
-        {
-            name: '@electron-forge/maker-pkg',
-            config: {
-                identity
-            },
-            platforms: ['darwin', 'mas']
-        }/*,
-        {
-            name: '@electron-forge/maker-squirrel',
-            config: {}
-        },
-        {
-            name: '@electron-forge/maker-dmg',
-            config: {
-                format: 'ULFO'
-            }
-        }*/
+            platforms: ['darwin']
+        }
     ],
     plugins: [
         {
@@ -89,6 +60,20 @@ const config: ForgeConfig = {
     ],
     publishers: []
 };
+
+(() => {
+    if (process.platform !== 'darwin' || !isMacAppStoreSubmission) {
+        return;
+    }
+
+    config.makers!.push({
+        name: '@electron-forge/maker-pkg',
+        config: {
+            identity
+        },
+        platforms: ['darwin', 'mas']
+    });
+})();
 
 (() => {
     if (process.platform !== 'darwin' || isMacAppStoreSubmission) {
